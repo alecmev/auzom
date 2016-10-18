@@ -1,0 +1,86 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.SeasonVideos {
+  background: $gray0;
+  padding: 30px 12px;
+
+  &-inner {
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    min-width: $app-width;
+  }
+
+  &-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &Outer2 {
+      flex: 1;
+      max-width: 1280px;
+      background: rgba($gray7, 0.05);
+    }
+
+    &Outer {
+      position: relative;
+      padding-bottom: 56.25%;
+    }
+  }
+
+  &-list {
+    position: relative;
+    width: 340px;
+    background: rgba($gray7, 0.1);
+    overflow-y: scroll;
+
+    &Inner {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+
+      &::after {
+        display: block;
+        height: 64px;
+        content: 'fin';
+        line-height: 64px;
+        text-align: center;
+        font-style: italic;
+      }
+    }
+
+    &Item {
+      @include water;
+      padding: 0 32px 0 16px;
+      height: 63px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid $gray2;
+      cursor: pointer;
+      width: 100%;
+
+      &:hover {
+        background: rgba($gray7, 0.05);
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      &.is-selected {
+        background: linear-gradient(
+          to left,
+          rgba($gray7, 0.75),
+          rgba($gray7, 1)
+        );
+        color: $gray-1;
+        font-weight: 700;
+      }
+    }
+  }
+}

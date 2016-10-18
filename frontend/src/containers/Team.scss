@@ -1,0 +1,18 @@
+@import '../utils/utils';
+
+.Team {
+  background-color: $gray0;
+  padding: 64px 0;
+
+  .Button {
+    margin-left: 12px;
+  }
+
+  &-settings {
+    color: $yellow;
+  }
+
+  &-secondary {
+    opacity: 0.5;
+  }
+}

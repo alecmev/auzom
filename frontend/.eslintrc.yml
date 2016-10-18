@@ -1,0 +1,41 @@
+extends: airbnb
+parser: babel-eslint
+
+env:
+  browser: true
+
+globals:
+  __DEV__: true
+  React: true
+
+rules:
+  # too many requires to bother disabling per-line
+  global-require: 0
+  # don't mean to offend, but blind people don't play first person shooters
+  jsx-a11y/anchor-has-content: 0
+  # don't really care about a11y
+  jsx-a11y/img-has-alt: 0
+  # same as airbnb, just 80 chars instead of 100
+  max-len: [2, 80, 2, { ignoreUrls: true, ignoreComments: false }]
+  # apparently, x.y[0].z counts as a 4-level chain...
+  newline-per-chained-call: [2, { ignoreChainWithDepth: 4 }]
+  # until the custom confirm is here
+  no-alert: 0
+  # yeah, no
+  no-continue: 0
+  # doesn't allow mutating arguments otherwise
+  no-param-reassign: [2, { props: false }]
+  # just my preference
+  no-underscore-dangle: 0
+  # doesn't allow 'a && !b && doStuff();' otherwise
+  no-unused-expressions: [2, { allowShortCircuit: true }]
+  # doesn't allow sandwiches like '})}>' otherwise
+  react/jsx-closing-bracket-location: 0
+  # yeah... no
+  react/jsx-first-prop-new-line: 0
+  # false positive when destructuring function args, e.g. in load
+  react/no-unused-prop-types: 0
+  # false positive when extending a custom component
+  react/prefer-stateless-function: 0
+  # React is imported automatically by a plugin
+  react/react-in-jsx-scope: 0

@@ -1,0 +1,273 @@
+@import '../utils/utils';
+
+.Home {
+  font-size: 17px;
+  font-family: 'Titillium Web';
+
+  &-hero {
+    margin-top: 20px;
+    margin-bottom: 56px;
+
+    &Inner {
+      height: 208px;
+      display: flex;
+      align-items: center;
+    }
+
+    &Filler {
+      flex: 1;
+    }
+
+    &Splitter {
+      background-color: $gray4;
+      height: 100%;
+      width: 1px;
+      margin: 0 48px;
+    }
+  }
+
+  &-slogan {
+    line-height: 32px;
+
+    &Bottom {
+      margin-left: 104px;
+      margin-top: -14px;
+    }
+
+    &Normal {
+      font-weight: 200;
+      font-size: 24px;
+    }
+
+    &Bold {
+      font-weight: 700;
+      font-size: 32px;
+      color: $yellow;
+    }
+  }
+
+  &-youare {
+    font-style: italic;
+    line-height: 20px;
+
+    &Punch {
+      font-weight: 700;
+      margin-top: 16px;
+    }
+  }
+
+  // these imgurs are temporary, dynamic tournament images will be used
+
+  &-row {
+    background: url(https://i.imgur.com/CFlFIma.png);
+    background-size: cover;
+    background-position: center;
+    height: 192px;
+    position: relative;
+    overflow: hidden;
+
+    &--right {
+      background-image: url(https://i.imgur.com/OV6f6hL.png);
+    }
+
+    &--last {
+      background-image: url(https://i.imgur.com/ZmF7O6A.png);
+      height: auto;
+      z-index: 1; // for the absolutely positioned blurred logo
+    }
+
+    & ~ & { // all except the first one
+      margin-top: 4px;
+    }
+
+    &::before {
+      display: block;
+      position: absolute;
+      content: '';
+      height: 100%;
+      width: calc(50% - #{$app-width / 2});
+      background: linear-gradient(to left, rgba($gray-1, 0.75), rgba($gray-1, 0.25));
+    }
+
+    &--right::before {
+      right: 0;
+      background: linear-gradient(to right, rgba($gray-1, 0.75), rgba($gray-1, 0.25));
+    }
+
+    &Inner {
+      display: flex;
+      height: 100%;
+    }
+
+    &Sidebar {
+      flex: 0 0 192px;
+      font-family: Montserrat;
+      font-weight: 700;
+      font-size: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        
+        background: url(https://i.imgur.com/XuVJKLm.png);
+        background-position: center;
+        opacity: 0.5;
+        @include water;
+      }
+
+      &:hover::before {
+        opacity: 0.75;
+        @include transform(scale(1.2));
+      }
+
+      &Inner {
+        position: relative;
+      }
+
+      &Stat {
+        & > div {
+          font-family: 'Titillium Web';
+          font-weight: 200;
+          font-size: 20px;
+          margin-top: -4px;
+        }
+
+        & ~ & {
+          margin-top: 16px;
+        }
+      }
+    }
+
+    &--right &Sidebar::before {
+      background-image: url(https://i.imgur.com/8iPoG4T.png);
+    }
+
+    &--last &Sidebar::before {
+      background-image: url(https://i.imgur.com/REKbOLY.png);
+      opacity: 0.25;
+    }
+
+    &--last &Sidebar:hover::before {
+      opacity: 0.4;
+    }
+
+    &About {
+      padding: 12px 0 0 32px;
+      flex: 1;
+    }
+
+    &--right &About {
+      padding: 12px 32px 0 0;
+      text-align: right;
+    }
+
+    &--last &About {
+      padding-bottom: 24px;
+    }
+
+    &Title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-top: 8px;
+      display: flex;
+    }
+
+    &--right &Title {
+      flex-direction: row-reverse;
+    }
+
+    &Status {
+      font-size: 18px;
+      font-family: Montserrat;
+      background: $yellow;
+      color: $gray-1;
+      padding: 0 16px;
+      letter-spacing: -1px;
+      margin: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    &Info {
+      line-height: 20px;
+      margin-top: 16px;
+      width: 640px;
+
+      & > a {
+        color: $yellow;
+      }
+    }
+
+    &--right &Info {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    &Link {
+      margin-top: 14px;
+      color: $yellow;
+      display: inline-block;
+    }
+  }
+
+  &-cfa {
+    margin-top: 4px;
+    height: 320px;
+    background: linear-gradient(to left, rgba($yellow, 0.1), rgba($yellow, 0.01));
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background: url(https://i.imgur.com/j8FVnyd.png);
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &Inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    &Signup {
+      display: block;
+      width: 256px;
+      height: 64px;
+      background-color: $yellow;
+      line-height: 64px;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      color: $gray-1;
+      letter-spacing: 0;
+      @include water;
+
+      &:hover {
+        background-color: mix($yellow, $gray7, 75%);
+        letter-spacing: 1px;
+      }
+    }
+
+    &Evenif {
+      font-size: 12px;
+      font-style: italic;
+    }
+  }
+}

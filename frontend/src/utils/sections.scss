@@ -1,0 +1,78 @@
+@import '../utils/utils';
+
+@mixin double-part($name, $margined-width) {
+  $calc-width: calc(50% - #{$app-width / 2 - $margined-width });
+  @include double-part-side($name, Left, $calc-width, $margined-width);
+  @include double-part-side($name, Right, $calc-width, $margined-width);
+}
+
+@mixin double-part-side($name, $side, $calc-width, $margined-width) {
+  $root: &;
+  &#{$name}#{$side} {
+    width: $calc-width;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    > div:last-child {
+      flex: 1 0 auto;
+    }
+
+    .u-sectionMargined {
+      margin-#{to-lower-case($side)}: auto;
+      padding-#{to-lower-case($side)}: 12px;
+      width: $margined-width;
+    }
+  }
+}
+
+.u-section {
+  &Single {
+    width: 100%;
+    min-width: $app-width + 24px;
+    
+    .u-sectionMargined {
+      margin: 0 auto;
+      padding: 0 12px;
+      width: $app-width;
+    }
+  }
+
+  &Double {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    @include double-part(OneThird, $app-width / 3);
+    @include double-part(TwoThirds, $app-width * 2 / 3);
+  }
+
+  &Heading {
+    font-family: 'Titillium Web';
+    font-size: 24px;
+    padding-bottom: 24px;
+    padding-left: 12px;
+    padding-top: 22px;
+    vertical-align: top;
+  }
+
+  &Title {
+    padding-left: 12px;
+    position: relative;
+    top: -1px;
+
+    &Secondary {
+      color: $gray4;
+      font-size: 14px;
+    }
+  }
+
+  &Antititle {
+    cursor: pointer;
+    float: right;
+    margin-right: 16px;
+    position: relative;
+    top: -4px;
+  }
+}

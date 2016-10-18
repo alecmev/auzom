@@ -1,0 +1,206 @@
+@import '~react-datetime/css/react-datetime.css';
+
+@import '../utils/utils';
+
+.Datetime {
+  position: relative;
+  color: $gray7;
+
+  &-input.is-empty input {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  &-clear {
+    @include water;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 40px;
+    width: 25px;
+    padding-right: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #999;
+
+    &:hover {
+      color: $red;
+    }
+
+    &.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  @include labmod(false);
+
+  &-input.rdtOpen + &-label {
+    color: $yellow;
+  }
+}
+
+.rdt {
+  $root: &;
+  margin-bottom: 12px;
+  font-size: 14px;
+
+  input {
+    border: none;
+    border-left: 3px solid $gray4;
+
+    @include water;
+    background: rgba($gray7, 0.1);
+    box-sizing: border-box;
+    display: block;
+    line-height: 36px;
+    outline: none;
+    padding: 8px 12px 0 12px;
+    width: 100%;
+    color: inherit;
+    cursor: default;
+  }
+
+  &Open input {
+    background: rgba($gray7, 0.2);
+    border-color: $yellow;
+  }
+
+  &Picker {
+    border: none;
+    border-left: 3px solid $yellow;
+    border-top: 1px solid $gray-1;
+
+    position: relative;
+    margin-top: 0;
+    box-shadow: none;
+    background: rgba($gray7, 0.2);
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+
+    th, tfoot {
+      border-color: $gray-1;
+    }
+
+    td#{$root}Today:hover,
+    td#{$root}Hour:hover,
+    td#{$root}Minute:hover,
+    td#{$root}Second:hover,
+    #{$root}TimeToggle:hover,
+    td#{$root}Month:hover,
+    td#{$root}Year:hover {
+      background: rgba($gray7, 0.1) !important;
+    }
+
+    .dow {
+      width: 36px;
+    }
+  }
+
+  &Switch, &TimeToggle {
+    height: 36px !important;
+    padding: 0;
+  }
+
+  &Prev, &Next {
+    font-size: 0 !important;
+    width: 36px !important;
+    padding: 0;
+
+    &:hover {
+      background: transparent !important;
+    }
+  }
+
+  button:focus {
+    outline:0;
+  }
+
+  &Prev button, &Next button {
+    height: 36px !important;
+    font-size: 0 !important;
+    vertical-align: middle !important;
+    width: 36px !important;
+    padding: 0;
+
+    &:before {
+      content: '';
+      border-style: solid;
+      box-sizing: border-box;
+      display: inline-block;
+      height: 0;
+      width: 0;
+    }
+  }
+
+  &Next {
+    text-align: right;
+  }
+
+  &Prev button:before {
+    border-color: transparent #999 transparent transparent;
+    border-width: 5px 5px 5px 2.5px;
+    margin-left: -2.5px;
+  }
+
+  &Next button:before {
+    border-color: transparent transparent transparent #999;
+    border-width: 5px 2.5px 5px 5px;
+    margin-right: -3.5px;
+  }
+
+  &Day {
+    cursor: pointer;
+  }
+
+  &Today:before {
+    border-bottom-color: $yellow !important;
+  }
+
+  &Active#{&}Today:before {
+    border-bottom-color: $gray-1 !important;
+  }
+
+  &Switch:hover, button:hover, &Day:hover {
+    background: rgba($gray7, 0.1) !important;
+  }
+
+  td#{&}Active {
+    color: $gray-1 !important;
+    text-shadow: none !important;
+    background: $yellow;
+    font-weight: 700;
+
+    &:hover {
+      background: mix($yellow, $gray7, 50%) !important;
+    }
+  }
+
+  &Counters {
+    display: flex;
+    justify-content: center;
+  }
+
+  &Counter {
+    #{$root}Btn {
+      height: 32px;
+      line-height: 32px;
+      margin: 4px 0;
+      width: 40px;
+      color: inherit;
+
+      &:hover {
+        background: rgba($gray7, 0.2);
+      }
+    }
+
+    #{$root}Count {
+      line-height: 20px;
+      font-size: 24px;
+      font-weight: 700;
+      height: 20px;
+    }
+  }
+}

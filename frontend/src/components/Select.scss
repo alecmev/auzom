@@ -1,0 +1,154 @@
+@import '~react-select/dist/react-select.min.css';
+
+@import '../utils/utils';
+
+.Select {
+  margin-bottom: 12px;
+  outline: none;
+  position: relative;
+  font-size: 14px;
+
+  &-control {
+    @include water;
+    border: none;
+    border-left: 3px solid $gray4;
+    border-radius: 0;
+    background: rgba($gray7, 0.1);
+    height: 44px;
+    position: static;
+  }
+
+  &.is-focused > &-control {
+    background: rgba($gray7, 0.2);
+    border-color: $yellow;
+    box-shadow: none;
+  }
+
+  &.is-open > &-control {
+    border-bottom-color: transparent;
+  }
+
+  &-placeholder, &-input {
+    @include water;
+    padding: 8px 12px 0 15px !important;
+    line-height: 36px;
+    margin: 0 !important;
+    height: 36px;
+  }
+
+  &-input {
+    padding-left: 12px !important;
+    height: 26px;
+  }
+
+  &--multi.has-value &-input {
+    padding: 0 0 0 4px !important;
+    line-height: 26px;
+    margin-top: 4px !important;
+  }
+
+  input {
+    color: $gray7;
+    padding: 0;
+  }
+
+  &-menu-outer {
+    position: relative;
+    border: none;
+    border-left: 3px solid $yellow;
+    border-top: 1px solid $gray-1;
+    border-radius: 0;
+    background: rgba($gray7, 0.2);
+    box-shadow: none;
+    margin: 0;
+    z-index: default;
+  }
+
+  &-option {
+    @include water;
+    background: transparent;
+    color: $gray7;
+
+    &.is-focused {
+      background: rgba($gray7, 0.1);
+      color: $gray7;
+    }
+  }
+
+  &-value-label {
+    color: $gray7 !important;
+  }
+
+  &:not(#{&}--multi) &-value {
+    @include water;
+    color: $gray7 !important;
+    line-height: 36px !important;
+    padding: 8px 12px 0 15px !important;
+  }
+
+  &-outer.is-empty &:not(#{&}--multi) &-value,
+  &-outer.is-empty &-placeholder,
+  &-outer.is-empty &-input {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  &--multi.has-value &-multi-value-wrapper {
+    margin-top: 20px;
+    margin-left: 4px;
+    margin-bottom: 8px;
+  }
+
+  &--multi &-value {
+    border: 1px solid $gray3;
+    border-radius: 0;
+    background: rgba($gray7, 0.1);
+    color: $gray7;
+    margin-left: 4px;
+    margin-top: 4px;
+    line-height: 24px;
+    font-size: inherit;
+
+    &-icon {
+      line-height: 22px;
+      padding-right: 0;
+      border: 0;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      vertical-align: top;
+
+      &:hover {
+        color: $red;
+        background: transparent;
+      }
+    }
+
+    &-label {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      vertical-align: top;
+    }
+  }
+
+  &-arrow-zone:hover > &-arrow {
+    border-top-color: $yellow;
+  }
+
+  &-clear-zone:hover {
+    color: $red;
+  }
+
+  &-outer {
+    position: relative;
+  }
+
+  &-aria-only {
+    display: none !important; // fix for firefox wrapping
+  }
+
+  @include labmod(false);
+
+  &.is-focused + &-label {
+    color: $yellow;
+  }
+}

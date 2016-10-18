@@ -1,0 +1,92 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.BracketTeam {
+  cursor: default;
+
+  &-title {
+    font-weight: 400;
+    fill: $gray2;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  &-seed {
+    text-anchor: end;
+    font-weight: 200;
+    fill: $gray3;
+    font-size: 16px;
+  }
+
+  &-rect {
+    &--pending {
+      fill: transparent;
+      stroke: $gray1;
+      stroke-location: inside;
+    }
+
+    &--seeded {
+      fill: $gray1;
+    }
+  }
+
+  &-hover {
+    @include water;
+    opacity: 0;
+    fill: none;
+
+    &--seeded, &--fullySeeded, &--loss {
+      fill: $gray5;
+    }
+
+    &--win {
+      fill: $yellow;
+    }
+
+    &--loss {
+      fill: $red;
+    }
+
+    &--draw {
+      fill: $cyan;
+    }
+  }
+
+  &--highlight &-hover {
+    opacity: 1;
+  }
+
+  &-name {
+    @include water;
+    font-weight: 200;
+    fill: $gray7;
+    font-size: 16px;
+
+    &--win {
+      font-weight: 400;
+    }
+  }
+
+  &-score {
+    @include water;
+    text-anchor: end;
+    font-weight: 200;
+    fill: $gray7;
+    font-size: 16px;
+
+    &--win {
+      fill: $yellow;
+      font-weight: 700;
+    }
+
+    &--draw {
+      font-weight: 700;
+    }
+  }
+
+  &--highlight &-name, &--highlight &-score {
+    fill: $gray-1;
+    font-weight: 700;
+  }
+}

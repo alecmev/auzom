@@ -1,0 +1,378 @@
+@import '../utils/utils';
+
+.SeasonHome {
+  &-info {
+    background-color: $gray0;
+    font-size: 16px;
+    font-family: 'Titillium Web';
+    padding: 20px 0;
+
+    &Inner {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 40px;
+    }
+
+    &Heading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-weight: 700;
+      background: $gray1;
+      padding: 0 16px;
+    }
+
+    &Item {
+      font-weight: 200;
+      padding-left: 24px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &Title {
+      color: $gray4;
+      font-weight: 400;
+      font-size: 13px;
+    }
+
+    &Body {
+      font-size: 16px;
+
+      &--right {
+        text-align: right;
+        font-weight: 700;
+        font-family: Montserrat;
+      }
+    }
+
+    &Filler {
+      flex: 1;
+    }
+  }
+
+  &-extra {
+    background-color: $gray0;
+    font-family: 'Titillium Web';
+
+    &Inner {
+      display: flex;
+      align-items: center;
+    }
+
+    &Item {
+      @include water;
+      font-weight: 200;
+      text-align: left;
+      font-size: 14px;
+      background: linear-gradient(to bottom left, $gray1, $gray03);
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      position: relative;
+
+      img {
+        @include water;
+        width: 20px;
+        height: 20px;
+        opacity: 0.75;
+        position: relative;
+      }
+
+      > div {
+        @include water;
+        position: relative;
+        height: 0;
+        opacity: 0;
+        width: 100%;
+
+        > div {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          padding: 0 12px;
+          box-sizing: border-box;
+        }
+      }
+
+      &:hover > div {
+        height: 18px;
+        opacity: 1;
+      }
+
+      &::before {
+        @include water;
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        
+        background: $gray2;
+        opacity: 0;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
+    }
+
+    &Filler {
+      flex: 1;
+    }
+  }
+
+  &-about {
+    background: linear-gradient(to bottom left, rgba($yellow, 0.2), $gray1);
+    padding: 30px 0 30px 0;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &Inner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+    }
+
+    &Body {
+      font-size: 15px !important;
+      flex: 1;
+    }
+
+    &Fill {
+      width: 48px;
+    }
+
+    &Logo {
+      width: 192px;
+      height: 192px;
+      position: relative;
+      font-family: Montserrat;
+      font-weight: 700;
+      font-size: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba($gray-1, 1);
+      text-transform: uppercase;
+
+      &Background {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        
+        background-image: linear-gradient(
+          to top right,
+          rgba($gray7, 0.1),
+          rgba($gray7, 0.2)
+        );
+        background-position: center;
+        background-size: cover;
+        opacity: 0.5;
+      }
+
+      &Tag {
+        position: relative;
+        text-shadow: 0 0 16px $gray-1;
+      }
+    }
+  }
+
+  &-live {
+    background: linear-gradient(
+      to bottom right,
+      rgba($yellow, 1),
+      rgba($yellow, 0.25)
+    );
+    padding: 30px 12px;
+
+    &Inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: stretch;
+      justify-content: center;
+    }
+
+    &Video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      &Outer {
+        position: relative;
+        padding-bottom: 56.25%;
+      }
+
+      &Outer2 {
+        flex: 1;
+        max-width: 1280px;
+        background: rgba($gray-1, 0.2);
+      }
+    }
+
+    &Chat {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+
+      &Outer {
+        position: relative;
+        width: 340px;
+        background: rgba($gray-1, 0.2);
+      }
+    }
+  }
+
+  &-news {
+    background: $gray0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    &Inner {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-tile {
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+    &Image {
+      @include water;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
+      @include filter(brightness(90%) contrast(80%));
+    }
+
+    &:hover > &Image {
+      @include transform(scale(1.1, 1.1));
+      @include filter(brightness(100%) contrast(100%));
+    }
+
+    &--L {
+      width: 594px;
+      height: 366px;
+    }
+
+    &--M {
+      width: 366px;
+      height: 366px;
+    }
+
+    &--S {
+      width: 320px;
+      height: 198px;
+    }
+
+    &--none {
+      background: linear-gradient(
+        to bottom left,
+        rgba($gray7, 0.05),
+        rgba($gray7, 0)
+      );
+
+      &::before {
+        background: none !important;
+      }
+    }
+
+    &:not(&--none) {
+      cursor: pointer;
+    }
+    
+    &Image::after {
+      @include water;
+      position: absolute;
+      content: '';
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 1;
+      background: linear-gradient(195deg, transparent, rgba(black, 1));
+    }
+
+    &Info {
+      @include water;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 16px 24px 16px 24px;
+      font-family: 'Titillium Web';
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    &Title {
+      @include water;
+      font-size: 32px;
+      font-weight: 400;
+      color: $gray5;
+    }
+
+    &:hover &Title {
+      color: $gray7;
+    }
+
+    &--S &Title {
+      font-size: 24px;
+    }
+
+    &Date {
+      padding-top: 8px;
+      font-size: 16px;
+      font-weight: 200;
+    }
+  }
+
+  &-admin {
+    background: $gray1;
+    padding: 20px 0;
+
+    &Inner {
+      display: flex;
+
+      > * {
+        margin-right: 12px;
+      }
+    }
+
+    &Heading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-weight: 700;
+      background: $gray2;
+      padding: 0 16px;
+    }
+  }
+}

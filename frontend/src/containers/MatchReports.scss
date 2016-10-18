@@ -1,0 +1,19 @@
+@import '../utils/utils';
+
+.MatchReports {
+  background-color: $gray03;
+  padding: 64px 0;
+
+  &-secondary {
+    opacity: 0.5;
+  }
+
+  .Button {
+    margin-left: 12px;
+  }
+
+  &-deadline {
+    padding-left: 4px;
+    color: $yellow;
+  }
+}

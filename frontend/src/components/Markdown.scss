@@ -1,0 +1,101 @@
+@import '../utils/utils';
+
+.Markdown {
+  color: $gray6;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 22px;
+
+  > *:first-child, p:first-child {
+    margin-top: 0 !important;
+  }
+
+  > *:last-child, p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  a {
+    background-image: linear-gradient(to bottom, transparent 50%, $gray5 50%);
+    background-position: 0 17px;
+    background-repeat: repeat-x;
+    background-size: 2px 2px;
+    margin-bottom: -2px;
+    padding-bottom: 2px;
+    outline: 0;
+    text-decoration: none;
+  }
+
+  strong {
+    color: mix($gray6, $yellow, 20%);
+  }
+
+  em {
+    color: mix($gray6, $yellow, 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    line-height: 1.4;
+    margin-top: 1em;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 18px;
+  }
+
+  img {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: top; // so there's no space at the bottom
+  }
+
+  ul {
+    margin-bottom: 16px;
+    padding-left: 32px;
+  }
+
+  blockquote {
+    color: mix($gray5, $yellow, 50%);
+    border-left: 4px solid mix($gray4, $yellow, 50%);
+    padding: 0 15px;
+    margin: 0 0 16px 0;
+  }
+
+  table {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  table > * {
+    width: 100%;
+  }
+
+  th {
+    font-weight: 700;
+    text-align: left;
+    background: $gray15;
+  }
+
+  th, td {
+    padding: 6px 13px;
+  }
+
+  tr {
+    border: 1px solid $gray15;
+  }
+}

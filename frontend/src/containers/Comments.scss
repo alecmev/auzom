@@ -1,0 +1,42 @@
+@import '../utils/utils';
+
+.Comments {
+  &-inner {
+    margin: 0 auto;
+    width: $form-width * 2;
+  }
+
+  &-newCommentOuter {
+    position: relative;
+  }
+
+  &-refresh {
+    position: absolute;
+    left: 100%;
+    margin-left: 12px;
+    line-height: 32px;
+    top: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+    @include water;
+
+    &Arrow {
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    &Action {
+      padding-left: 6px;
+      vertical-align: top;
+      font-weight: 200;
+    }
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  &-submitOuter {
+    text-align: right;
+  }
+}

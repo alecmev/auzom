@@ -1,0 +1,62 @@
+@import '../utils/utils';
+
+.MatchReportNew {
+  background-color: $gray03;
+  padding: 64px 0;
+  white-space: nowrap;
+
+  &-inner {
+    margin: 0 auto;
+    width: $form-width;
+  }
+
+  &-round {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  &-label {
+    position: absolute;
+    text-align: right;
+    text-transform: uppercase;
+    right: 100%;
+    height: 100%;
+    margin-right: 8px;
+    padding-right: 12px;
+    border-right: 4px solid $gray4;
+
+    &Map {
+      color: $gray5;
+      margin-top: 8px;
+      font-size: 24px;
+      line-height: 20px;
+    }
+
+    &Round {
+      color: $gray4;
+      line-height: 16px;
+    }
+  }
+
+  &-score {
+    display: inline-block !important;
+    width: ($form-width - 8) / 2 !important;
+    margin-bottom: 8px !important;
+
+    &--left {
+      margin-right: 8px;
+    }
+  }
+
+  &-checkbox {
+    margin-bottom: 8px !important;
+  }
+
+  &-reason {
+    margin-bottom: 8px !important;
+  }
+
+  &-button {
+    margin-bottom: 8px !important;
+  }
+}

@@ -1,0 +1,89 @@
+@import 'bourbon';
+
+$app-width: 960px;
+
+$gray-1: #262626;
+$gray0: #2D2D2D;
+$gray03: #313131;
+$gray06: #353535;
+$gray1: #393939;
+$gray15: #454545;
+$gray2: #515151;
+$gray3: #747369;
+$gray4: #A09F93;
+$gray5: #D3D0C8;
+$gray6: #E8E6DF;
+$gray7: #F2F0EC;
+
+$red: #F2777A;
+$orange: #F99157;
+$yellow: #FFCC66;
+$green: #99CC99;
+$cyan: #66CCCC;
+$blue: #6699CC;
+$magenta: #CC99CC;
+$brown: #D27B53;
+
+$form-width: 256px;
+
+$content-width: 123px;
+$sidebar-width: 456px;
+
+@mixin water($time: 250ms, $target: all) {
+  @include transition($target $time $ease-out-quad);
+}
+
+.u-clear {
+  clear: both;
+}
+
+@mixin labmod($focus: true, $label: true) {
+  @if $label {
+    &-label {
+      @include water;
+      font-size: 12px;
+      line-height: 16px;
+      height: 16px;
+      overflow: hidden;
+      position: absolute;
+      left: 15px;
+      top: 5px;
+      color: rgba($gray7, 0.5);
+      pointer-events: none;
+      font-family: 'Titillium Web';
+
+      &.is-collapsed {
+        height: 2px;
+        color: transparent !important;
+      }
+    }
+  }
+
+  &-modified {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 16px 16px 0;
+    border-color: transparent $yellow transparent transparent;
+    cursor: help;
+
+    &.is-collapsed {
+      border-color: transparent;
+      pointer-events: none;
+    }
+  }
+
+  @if $focus {
+    &-input:focus + &-label {
+      color: $yellow;
+    }
+  }
+}
+
+.u-anchor {
+  position: absolute;
+  top: -80px;
+}

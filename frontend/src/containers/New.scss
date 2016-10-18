@@ -1,0 +1,28 @@
+@import '../utils/utils';
+
+.New {
+  background-color: $gray0;
+  padding: 64px 0;
+
+  &--lighter {
+    background-color: $gray03;
+  }
+
+  &-inner {
+    margin: 0 auto;
+    width: $form-width;
+  }
+
+  &-link {
+    color: $gray5;
+    display: block;
+    font-size: 12px;
+    margin: 6px 8px 0 0;
+    outline: none;
+    text-align: right;
+
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}

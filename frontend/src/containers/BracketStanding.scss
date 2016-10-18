@@ -1,0 +1,47 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.BracketStanding {
+  &-place {
+    padding-left: 0 !important;
+  }
+
+  &-divider {
+    background-color: rgba($gray7, 0.2);
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    padding: 0 !important;
+
+    &--gold {
+      background-color: $yellow;
+    }
+
+    &--silver {
+      background-color: $gray5;
+    }
+
+    &--bronze {
+      background-color: $brown;
+    }
+  }
+
+  &-team {
+    text-align: left;
+  }
+
+  td:not(#{&}-place):not(#{&}-divider) {
+    @include water;
+    cursor: pointer;
+  }
+
+  &--highlight > td:not(#{&}-place):not(#{&}-divider) {
+    background-color: $gray5;
+    color: $gray-1;
+    font-weight: 700;
+  }
+
+  &--odd:not(&--highlight) > td:not(#{&}-place):not(#{&}-divider) {
+    background-color: rgba($gray7, 0.02);
+  }
+}

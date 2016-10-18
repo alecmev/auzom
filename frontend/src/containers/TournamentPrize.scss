@@ -1,0 +1,106 @@
+@import '../utils/utils';
+
+.TournamentPrize {
+  display: block;
+  height: 96px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  position: relative;
+
+  &--small {
+    height: 48px;
+  }
+
+  &-picture {
+    @include water(150ms);
+    opacity: 0.25;
+    position: absolute;
+  }
+
+  &:hover &-picture {
+    opacity: 0.8;
+  }
+
+  &-glow {
+    @include water(150ms);
+    height: 100%;
+    opacity: 0.4;
+    position: absolute;
+    width: 100%;
+
+    &--gold {
+      background: linear-gradient(to left, $yellow, transparent);
+    }
+
+    &--silver {
+      background: linear-gradient(to left, $gray5, transparent);
+    }
+
+    &--bronze {
+      background: linear-gradient(to left, $brown, transparent);
+    }
+  }
+
+  &:hover &-glow {
+    opacity: 0.3;
+  }
+
+  &:hover &-header, &:hover &-name {
+    margin-left: 12px;
+    opacity: 0.3;
+  }
+
+  &-header {
+    @include water;
+    margin-top: 4px;
+    padding-left: 12px;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  &-place {
+    font-weight: 700;
+    padding-right: 4px;
+    text-transform: uppercase;
+
+    &--gold {
+      color: $yellow;
+    }
+
+    &--silver {
+      color: $gray5;
+    }
+
+    &--bronze {
+      color: $brown;
+    }
+  }
+
+  &-scope {
+    font-size: 12px;
+    padding-right: 4px;
+    text-transform: uppercase;
+  }
+
+  &-pieces {
+    padding-right: 4px;
+    position: relative;
+  }
+
+  &-name {
+    @include water;
+    font-size: 32px;
+    margin-top: -14px;
+    padding-left: 10px;
+    position: relative;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &--small &-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: -9px;
+    padding-left: 12px;
+  }
+}

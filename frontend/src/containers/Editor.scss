@@ -1,0 +1,47 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.Editor {
+  background: $gray0;
+  padding: 24px 0;
+  display: inline-block;
+  min-width: 100%;
+
+  &-section {
+    display: flex;
+
+    &::before {
+      flex: 1;
+      content: '';
+    }
+
+    &::after {
+      flex: 1;
+      content: '';
+    }
+  }
+
+  &-left {
+    width: 664px;
+    min-width: 664px;
+    padding-left: 12px;
+    text-align: right;
+  }
+
+  &-right {
+    width: 640px;
+    min-width: 640px;
+    margin-left: 24px;
+    padding-right: 12px;
+
+    > * {
+      margin-bottom: 12px;
+    }
+
+    &Img {
+      max-width: 640px;
+      max-height: 360px;
+    }
+  }
+}

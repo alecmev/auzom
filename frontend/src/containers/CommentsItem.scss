@@ -1,0 +1,135 @@
+@import '../utils/utils';
+
+.CommentsItem {
+  background: rgba($gray7, 0.05);
+  margin-bottom: 12px;
+  position: relative;
+
+  &--glue {
+    margin-top: -11px;
+  }
+
+  &--admin:not(.is-deleted) {
+    background: linear-gradient(
+      120deg,
+      rgba($yellow, 0.15) 0%,
+      rgba($gray7, 0.05) 256px
+    );
+  }
+
+  &.is-editing {
+    background: none;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &-body {
+    padding: 12px 16px;
+    font-family: Lato;
+    font-size: 14px;
+    line-height: 22px;
+    overflow-x: auto;
+    min-height: 40px;
+    box-sizing: border-box;
+
+    &--deleted {
+      opacity: 0.25;
+    }
+
+    &--noComments {
+      opacity: 0.25;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+
+    &--deletedSnip {
+      opacity: 0.75;
+      color: $red !important;
+    }
+  }
+
+  &-author {
+    @include water(250ms, color);
+    position: absolute;
+    right: 100%;
+    margin-right: 1px;
+    white-space: nowrap;
+
+    &Name {
+      line-height: 46px;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 8px;
+      position: relative;
+      
+      &--withRole {
+        line-height: 30px;
+      }
+    }
+
+    &Role {
+      color: $yellow;
+      font-size: 13px;
+      position: absolute;
+      top: 19px;
+      right: 0;
+      font-weight: 200;
+      line-height: normal;
+    }
+
+    &Avatar {
+      width: 46px;
+      height: 46px;
+      display: inline-block;
+      vertical-align: top;
+      background: linear-gradient(to bottom left, $gray7, $gray5);
+    }
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  &--noBorder > &-author {
+    margin-right: 8px;
+  }
+
+  &-meta {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    white-space: nowrap;
+    font-weight: 200;
+    margin-left: 12px;
+    line-height: 46px;
+    font-family: 'Titillium Web';
+
+    &--withEdited {
+      line-height: 36px;
+    }
+    
+    &Edited {
+      position: absolute;
+      top: 22px;
+      font-size: 13px;
+      color: $gray4;
+      line-height: normal;
+    }
+
+    &Action {
+      // fighting last edited
+      position: relative;
+      z-index: 1;
+
+      margin-left: 6px;
+      cursor: pointer;
+      @include water;
+
+      &:hover {
+        color: $yellow;
+      }
+    }
+  }
+}

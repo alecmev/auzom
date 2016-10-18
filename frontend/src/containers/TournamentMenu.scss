@@ -1,0 +1,157 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.TournamentMenu {
+  font-family: 'Titillium Web';
+
+  &-title {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+  }
+
+  &-logo {
+    width: 96px;
+    height: 96px;
+    position: relative;
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba($gray-1, 0.5);
+    margin-right: 20px;
+
+    &Background {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      
+      background-image: linear-gradient(
+        to top right,
+        rgba($gray7, 0.1),
+        rgba($gray7, 0.2)
+      );
+      background-position: center;
+      background-size: cover;
+      opacity: 0.5;
+    }
+
+    &Tag {
+      position: relative;
+      text-shadow: 0 0 16px $gray-1;
+    }
+  }
+
+  &-game {
+    font-weight: 700;
+    vertical-align: top;
+  }
+
+  &-tournament {
+    font-weight: 400;
+
+    &-game {
+      position: relative;
+      padding-left: 1px;
+    }
+
+    &-name {
+      font-size: 32px;
+      margin-top: -4px;
+    }
+
+    &-season {
+      display: inline-block;
+      font-size: 16px;
+      padding-left: 2px;
+      padding-top: 6px;
+      border-top: 1px solid $gray3;
+      margin-top: 4px;
+      padding-right: 24px;
+    }
+
+    &-status {
+      color: $red;
+      font-weight: 200;
+      margin-left: 8px;
+
+      &--gray {
+        color: $gray5;
+      }
+
+      &--green {
+        color: $green;
+      }
+
+      &--yellow {
+        color: $yellow;
+      }
+
+      &--orange {
+        color: $orange;
+      }
+
+      &--red {
+        color: $red;
+      }
+    }
+  }
+
+  &-entries {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 48px;
+
+    &Fill {
+      flex: 1;
+    }
+  }
+
+  &-entry {
+    border-bottom: 3px solid transparent;
+    color: $gray5;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 48px;
+    padding: 0 16px;
+    text-transform: uppercase;
+
+    &.is-active {
+      border-color: mix($gray0, $yellow, 25%);
+      background: linear-gradient(to bottom, transparent, rgba($gray7, 0.075));
+      color: $gray7;
+    }
+
+    &:hover {
+      border-color: $yellow;
+      background: linear-gradient(to bottom, transparent, rgba($gray7, 0.15));
+      color: $gray7;
+    }
+
+    &--highlight {
+      background: rgba($yellow, 0.1);
+
+      &:hover {
+        background: rgba($yellow, 0.3);
+      }
+    }
+
+    &--warn {
+      background: rgba($red, 0.3);
+
+      &:hover {
+        background: rgba($red, 0.5);
+      }
+    }
+  }
+}

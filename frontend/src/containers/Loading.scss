@@ -1,0 +1,24 @@
+@import '../utils/utils';
+
+// TODO: re-use the animation in both Loading and Page
+
+@include keyframes(flash) {
+  100% { @include transform(rotatex(360deg)) }
+}
+
+.Loading {
+  min-height: 32px;
+
+  &-logo {
+    @include animation-name(flash);
+    @include animation-duration(1s);
+    @include animation-timing-function($ease-out-quad);
+    @include animation-iteration-count(infinite);
+    left: 50%;
+    margin-left: -14px;
+    margin-top: -16px;
+    position: absolute;
+    top: 50%;
+    height: 32px;
+  }
+}

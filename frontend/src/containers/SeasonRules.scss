@@ -1,0 +1,83 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.SeasonRules {
+  background-color: $gray0;
+
+  &-inner {
+    display: flex;
+  }
+
+  &-content {
+    padding: 30px 30px 30px 0;
+    width: 640px;
+  }
+
+  &-toc {
+    width: 320px;
+
+    &Item {
+      @include water;
+      display: flex;
+      padding: 12px 30px;
+      color: $gray4;
+      line-height: 16px;
+
+      &:hover {
+        background-color: $gray15;
+        color: $gray7;
+      }
+
+      &--1 {
+        margin-top: 25px;
+        font-size: 16px;
+        font-weight: 700;
+        position: relative;
+
+        &:not(:first-child)::before {
+          display: block;
+          content: '';
+          position: absolute;
+          height: 1px;
+          background: $gray2;
+          top: -13px;
+          width: 100%;
+          left: 0;
+          pointer-events: none;
+        }
+      }
+
+      &--2 {
+        padding-left: 40px;
+      }
+
+      &--3 {
+        padding-left: 50px;
+      }
+
+      &--4, &--5, &--6 {
+        padding-left: 60px;
+      }
+
+      &--edit {
+        margin-top: 36px !important;
+        justify-content: center;
+        background: $gray1;
+        font-family: 'Titillium Web';
+      }
+
+      &--edit + * {
+        margin-top: 12px;
+
+        &::before {
+          display: none !important;
+        }
+      }
+
+      &:first-child {
+        margin-top: 25px;
+      }
+    }
+  }
+}

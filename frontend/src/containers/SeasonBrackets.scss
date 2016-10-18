@@ -1,0 +1,45 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.SeasonBrackets {
+  &-menu {
+    background-color: $gray03;
+    padding: 16px 0;
+    line-height: 24px;
+    font-family: 'Titillium Web';
+    box-sizing: border-box;
+
+    &Inner {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      padding: 0 12px;
+    }
+
+    &Item {
+      color: $gray5;
+      font-size: 16px;
+      padding: 0 8px;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &--title {
+        padding-left: 0;
+        color: $gray3 !important;
+        cursor: default !important;
+        width: 68px;
+      }
+
+      &:hover, &.is-active {
+        color: $yellow;
+      }
+    }
+
+    &Divider {
+      width: 1px;
+      margin: 0 16px;
+      background-color: $gray15;
+    }
+  }
+}

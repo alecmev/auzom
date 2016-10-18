@@ -1,0 +1,126 @@
+@import 'bourbon';
+@import '../utils/utils';
+
+.MatchDetails {
+  background-color: $gray03;
+  padding: 64px 0;
+  white-space: nowrap;
+  line-height: 40px;
+  font-family: 'Titillium Web';
+
+  &--inverted {
+    background-color: $gray0;
+  }
+
+  &-inner {
+    margin: 0 auto;
+    width: $form-width;
+  }
+
+  &-round {
+    position: relative;
+  }
+
+  &-map {
+    position: absolute;
+    text-align: right;
+    text-transform: uppercase;
+    right: 100%;
+    height: 100%;
+    font-size: 16px;
+  }
+
+  &-side {
+    position: absolute;
+    font-weight: 200;
+    padding: 0 12px;
+    opacity: 0.5;
+
+    &--right {
+      right: 0;
+    }
+  }
+
+  &-notPlayed {
+    width: $form-width;
+    text-align: center;
+    font-size: 16px;
+    color: $red;
+    text-transform: uppercase;
+
+    &--cancelledOut {
+      text-decoration: line-through;
+    }
+  }
+
+  &-scores {
+    font-size: 24px;
+    position: relative;
+  }
+
+  &-penalty {
+    font-size: 16px;
+    line-height: 20px;
+    position: relative;
+  }
+
+  &-score {
+    display: inline-block;
+    width: ($form-width - 40) / 2;
+    font-weight: 200;
+
+    &--left {
+      margin-right: 40px;
+      text-align: right;
+    }
+
+    &--win {
+      color: $yellow;
+      font-weight: 700;
+    }
+
+    &--draw {
+      color: $cyan;
+      font-weight: 700;
+    }
+
+    &--override {
+      color: $green;
+      font-weight: 700;
+    }
+
+    &--penalty {
+      color: $red;
+      font-weight: 700;
+    }
+
+    &--cancelledOut {
+      text-decoration: line-through;
+    }
+  }
+
+  &-reason {
+    left: 100%;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+
+    &Green {
+      color: $green;
+      font-weight: 700;
+    }
+
+    &Red {
+      color: $red;
+      font-weight: 700;
+    }
+  }
+
+  &-rule {
+    height: 1px;
+    background-color: $gray4;
+    margin: 12px 0;
+    width: 200%;
+    margin-left: -50%;
+  }
+}

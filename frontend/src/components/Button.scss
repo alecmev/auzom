@@ -1,0 +1,63 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.Button {
+  @include user-select(none);
+  @include water;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Titillium Web';
+  outline: none;
+  padding: 0 12px;
+  text-transform: uppercase;
+  line-height: 0;
+
+  &--block {
+    display: flex;
+  }
+
+  &--normal {
+    color: $gray7;
+    padding: 0;
+    margin: 0 20px;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  &--important {
+    border-color: $yellow;
+    color: $gray7;
+    font-weight: 700;
+
+    &:hover, &:focus {
+      background: $yellow;
+      color: $gray-1;
+    }
+
+    &.is-disabled {
+      border-color: $gray2;
+      color: $gray3;
+    }
+  }
+
+  &--small {
+    font-size: 12px;
+    height: 20px;
+    font-weight: 400;
+  }
+
+  &--large {
+    font-size: 16px;
+    height: 36px;
+  }
+
+  &.is-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+}

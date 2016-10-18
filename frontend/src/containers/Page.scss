@@ -1,0 +1,336 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+@include keyframes(flash) {
+  100% { @include transform(rotatex(360deg)) }
+}
+
+.Page {
+  color: $gray7;
+
+  &-header {
+    border-bottom: 1px solid transparent;
+    position: fixed;
+    z-index: 1000;
+    @include water;
+    @include transition-property(background-color, border-bottom-color);
+
+    &.is-expanded {
+      background-color: $gray-1 !important;
+      border-bottom-color: transparent !important;
+    }
+
+    &.is-scrolled {
+      background-color: rgba(mix(black, $gray-1, 25%), 0.9);
+      border-bottom-color: $gray2;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 64px;
+    position: relative;
+    font-family: 'Titillium Web';
+
+    &Logo {
+      display: inline-block;
+      height: 32px;
+      margin-top: 15px;
+      padding-right: 16px;
+
+      &Image {
+        height: 32px;
+
+        &.is-loading {
+          @include animation-name(flash);
+          @include animation-duration(1s);
+          @include animation-timing-function($ease-out-quad);
+          @include animation-iteration-count(infinite);
+        }
+      }
+
+      &Title {
+        padding-left: 8px;
+        font-size: 24px;
+        position: relative;
+        top: -9px;
+      }
+
+      &Subtitle {
+        position: relative;
+        top: -17px;
+        font-size: 16px;
+        padding-left: 1px;
+        color: $yellow;
+
+        &Tooltip {
+          @include water;
+          background: $yellow;
+          top: 0;
+          left: -4px;
+          display: block;
+          opacity: 0;
+          padding-left: 6px;
+          font-weight: 700;
+          pointer-events: none;
+          position: absolute;
+          width: 0;
+          color: $gray-1;
+          line-height: 24px;
+        }
+
+        &:hover &Tooltip {
+          width: 64px;
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+    }
+
+    &Entry {
+      border-top: 4px solid transparent;
+      font-size: 17px;
+      line-height: 56px;
+      padding: 0 16px;
+      color: $gray4;
+      text-transform: uppercase;
+
+      &.is-active {
+        border-color: mix($gray-1, $yellow, 25%);
+        background: linear-gradient(to top, transparent, rgba($gray7, 0.075));
+        color: $gray7;
+      }
+
+      &:not(.is-disabled) {
+        cursor: pointer;
+
+        &:hover {
+          border-color: $yellow;
+          background: linear-gradient(to top, transparent, rgba($gray7, 0.15));
+          color: $gray7;
+        }
+      }
+
+      &--signup {
+        font-weight: 700;
+        color: $gray7;
+      }
+    }
+
+    &Filler {
+      flex: 1;
+    }
+
+    &Notifications {
+      background-color: $gray1;
+      width: 32px;
+      height: 32px;
+      margin-top: 16px;
+      cursor: pointer;
+
+      .octicon {
+        padding: 8px 9px;
+        color: $gray-1;
+      }
+    }
+
+    &Profile {
+      text-align: right;
+      padding-right: 12px;
+      padding-top: 20px;
+      line-height: 24px;
+      font-family: Lato;
+
+      &Name {
+        color: $gray5;
+        font-size: 16px;
+
+        // these are here to make it clickable above email
+        position: relative;
+        z-index: 1;
+      }
+
+      &Email {
+        color: $gray4;
+        margin-top: -6px;
+        opacity: 0;
+        @include water;
+      }
+
+      &.is-expanded &Email {
+        opacity: 1;
+      }
+    }
+
+    &Gravatar {
+      display: inline-block;
+      height: 48px;
+      margin-top: 8px;
+      cursor: pointer;
+      border-radius: 50%;
+      @include water;
+
+      &.is-expanded {
+        margin-top: 16px;
+        height: 96px;
+        border-radius: 0;
+      }
+    }
+  }
+
+  &-fancystuff {
+    float: left;
+    opacity: 0;
+    @include water;
+    height: 0;
+    visibility: hidden;
+    width: 640px;
+    box-sizing: border-box;
+    font-style: italic;
+    padding-left: 64px;
+    font-family: 'Titillium Web';
+
+    &.is-expanded {
+      opacity: 0.25;
+      height: 96px;
+      visibility: visible;
+      padding-top: 72px;
+    }
+  }
+
+  &-profile {
+    float: right;
+    max-height: 0;
+    opacity: 0;
+    @include water;
+    position: relative;
+    margin: 0;
+    border-top: $gray2 1px solid;
+    width: 320px;
+    text-align: right;
+    visibility: hidden;
+    font-family: 'Titillium Web';
+
+    &.is-expanded {
+      opacity: 1;
+      max-height: 128px; // adjust this when adding more menu items
+      margin: 78px 0 0 auto;
+      padding-top: 16px;
+      visibility: visible;
+      padding-bottom: 16px;
+    }
+
+    &Button {
+      color: $gray4;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 17px;
+      line-height: 40px;
+      min-width: 128px;
+      padding-right: 12px;
+      text-align: right;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: $gray1;
+        color: $gray7;
+      }
+    }
+  }
+
+  &-message {
+    line-height: 40px;
+    font-family: 'Titillium Web';
+    margin-top: -1px;
+
+    &--success {
+      background-color: mix($green, $gray-1, 25%);
+    }
+
+    &--error {
+      background-color: mix($red, $gray-1, 25%);
+    }
+
+    &Transition {
+      &-enter {
+        height: 0;
+        opacity: 0;
+
+        &-active {
+          @include water;
+          height: 40px;
+          opacity: 1;
+        }
+      }
+
+      &-leave {
+        height: 40px;
+        opacity: 1;
+
+        &-active {
+          @include water;
+          height: 0;
+          opacity: 0;
+        }
+      }
+    }
+
+    &Level {
+      font-weight: 700;
+      margin-right: 12px;
+
+      &--success{
+        color: $green;
+      }
+
+      &--error {
+        color: $red;
+      }
+    }
+
+    &URL {
+      font-family: monospace;
+      font-size: 14px;
+      padding: 4px 8px;
+      margin-right: 12px;
+      background-color: rgba($gray-1, 0.5);
+    }
+  }
+
+  &-theRest {
+    padding-top: 64px;
+    position: relative;
+    box-sizing: border-box;
+
+    &Inner {
+      @include transition(
+        filter 250ms $ease-out-quad,
+        -webkit-filter 250ms $ease-out-quad
+      );
+    }
+
+    &.is-muted > &Inner {
+      @include filter(blur(8px));
+    }
+
+    &::after {
+      content: '';
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      opacity: 0;
+      background-color: rgba(black, 0.5);
+      visibility: hidden;
+      @include water;
+    }
+
+    &.is-muted::after {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

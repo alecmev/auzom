@@ -1,0 +1,53 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.Tournament {
+  &-menu {
+    background-size: cover;
+    background-position: center;
+    padding-top: 64px;
+    margin-top: -64px;
+  }
+
+  &-sponsors {
+    background-color: $gray06;
+    height: 96px;
+
+    &Inner {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      height: 100%;
+    }
+
+    &Item {
+      @include water;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      &Outer {
+        flex: 1;
+        background: linear-gradient(to bottom left, $gray15, $gray06);
+      }
+
+      &:hover {
+        background-color: $gray2;
+        cursor: pointer;
+      }
+    }
+
+    &Divider {
+      background: $gray15;
+      margin: 24px 0;
+      width: 1px;
+
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}

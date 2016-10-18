@@ -1,0 +1,9 @@
+@import '../utils/utils';
+
+.About {
+  background-color: $gray0;
+
+  &-inner {
+    padding: 30px 320px 30px 0;
+  }
+}

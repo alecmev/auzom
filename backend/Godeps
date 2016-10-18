@@ -1,0 +1,17 @@
+github.com/bluele/slack
+github.com/codegangsta/cli
+github.com/djherbis/buffer
+github.com/elithrar/simple-scrypt
+github.com/getsentry/raven-go
+github.com/goji/param
+github.com/jmoiron/sqlx
+github.com/lib/pq
+github.com/Masterminds/squirrel
+github.com/minio/blake2b-simd
+github.com/rs/cors
+github.com/russross/blackfriday
+github.com/sendgrid/sendgrid-go v2.0.0
+github.com/sendgrid/smtpapi-go
+github.com/sergi/go-diff/diffmatchpatch
+github.com/Sirupsen/logrus
+github.com/zenazn/goji

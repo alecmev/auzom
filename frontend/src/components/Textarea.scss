@@ -1,0 +1,53 @@
+@import '../utils/utils';
+
+.Textarea {
+  $root: &;
+  position: relative;
+
+  &-common {
+    border: none;
+    border-left: 3px solid $gray4;
+
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    outline: none;
+    padding: 22px 12px 8px 12px;
+    width: 100%;
+    line-height: 22px;
+
+    &.is-empty {
+      padding-top: 4px;
+      padding-bottom: 4px;
+      line-height: 36px;
+      min-height: 44px;
+      height: 44px;
+    }
+  }
+
+  &-input {
+    @extend #{$root}-common;
+    @include water;
+    background: rgba($gray7, 0.1);
+    color: inherit;
+    display: block;
+    height: 100%;
+    left: 0;
+    overflow: hidden; // not needed anyway
+    position: absolute;
+    resize: none;
+
+    &:focus {
+      border-color: $yellow;
+      background: rgba($gray7, 0.15);
+    }
+  }
+
+  &-resizer {
+    @extend #{$root}-common;
+    visibility: hidden;
+    white-space: pre-wrap; // match textarea's default
+    word-wrap: break-word;
+  }
+
+  @include labmod;
+}

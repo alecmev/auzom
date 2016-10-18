@@ -1,0 +1,14 @@
+FROM golang:1
+
+RUN \
+  curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+  apt-get install -y nodejs && \
+  npm install -g gulp
+
+RUN \
+  wget https://raw.githubusercontent.com/pote/gpm/master/bin/gpm && \
+  chmod +x gpm && \
+  mv gpm /usr/local/bin
+
+WORKDIR /go/src/app
+EXPOSE 80

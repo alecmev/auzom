@@ -1,0 +1,78 @@
+@import '../utils/utils';
+
+.Footer {
+  height: 96px;
+  display: flex;
+  font-family: 'Titillium Web';
+
+  &-logo {
+    align-self: center;
+    opacity: 0.5;
+  }
+
+  &-who {
+    align-self: center;
+    font-weight: 400;
+    padding-left: 20px;
+    margin-top: -8px;
+    cursor: default;
+  }
+
+  &-madeBy {
+    font-size: 14px;
+    margin-bottom: -5px;
+    color: $gray2;
+  }
+
+  &-auzom {
+    color: $gray4;
+  }
+
+  &-entertainment {
+    font-size: 14px;
+    margin-top: -5px;
+    color: $gray4;
+  }
+
+  &-filler {
+    flex: 1;
+  }
+
+  &-link {
+    @include water;
+    align-self: center;
+    color: $gray7;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 32px;
+    opacity: 0.2;
+    text-transform: uppercase;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  &-social {
+    @include water;
+    align-self: center;
+    cursor: pointer;
+    margin-left: 16px;
+    opacity: 0.25;
+    line-height: 0;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &--first {
+      margin-left: 32px;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

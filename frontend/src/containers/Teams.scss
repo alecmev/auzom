@@ -1,0 +1,10 @@
+@import '../utils/utils';
+
+.Teams {
+  background-color: $gray0;
+  padding: 64px 0;
+
+  &-secondary {
+    opacity: 0.5;
+  }
+}

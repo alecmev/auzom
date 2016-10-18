@@ -1,0 +1,123 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.SeasonNewsItem {
+  background: $gray03;
+  padding-top: 36px;
+  display: inline-block;
+  min-width: 100%;
+
+  &-picture {
+    width: 960px;
+    display: block;
+    margin-bottom: 36px;
+
+    &Outer {
+      position: relative;
+    }
+
+    &Play {
+      @include water;
+      position: absolute;
+      top: 0;
+      left: 12px;
+      width: 960px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &Inner {
+        @include water;
+        width: 160px;
+        height: 90px;
+        font-size: 48px;
+        background: $gray7;
+        color: $gray-1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        padding-left: 4px;
+        opacity: 0.75;
+      }
+
+      &:hover {
+        background: rgba(black, 0.5);
+      }
+
+      &:hover &Inner {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-video {
+    width: 960px;
+    height: 540px;
+    padding-bottom: 36px !important;
+  }
+
+  &-inner {
+    width: 640px !important;
+    position: relative;
+  }
+
+  &-publishedAt {
+    color: $gray4;
+    padding-bottom: 8px;
+    font-family: 'Titillium Web';
+
+    &--hidden {
+      color: $red;
+    }
+
+    &Input {
+      margin-top: 8px;
+      width: $form-width;
+    }
+  }
+
+  &-body {
+    padding-top: 14px;
+  }
+
+  &-title, &-body {
+    width: 640px;
+  }
+
+  &-meta {
+    position: absolute;
+    top: 0;
+    right: 12px;
+    white-space: nowrap;
+    font-weight: 200;
+    margin-left: 12px;
+    font-family: 'Titillium Web';
+    text-align: right;
+
+    &Action {
+      // fighting last edited
+      position: relative;
+      z-index: 1;
+
+      margin-left: 6px;
+      cursor: pointer;
+      @include water;
+
+      &:hover {
+        color: $yellow;
+      }
+    }
+    
+    &Edited {
+      color: $gray4;
+    }
+  }
+
+  &-comments {
+    padding: 48px 0 52px;
+  }
+}

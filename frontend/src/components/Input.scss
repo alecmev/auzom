@@ -1,0 +1,41 @@
+@import '../utils/utils';
+
+.Input {
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+
+  &-input {
+    border: none;
+    border-left: 3px solid $gray4;
+
+    @include water;
+    background: rgba($gray7, 0.1);
+    box-sizing: border-box;
+    display: block;
+    line-height: 36px;
+    outline: none;
+    padding: 8px 12px 0 12px;
+    width: 100%;
+    color: inherit;
+    font-size: 14px;
+
+    &:focus {
+      border-color: $yellow;
+      background: rgba($gray7, 0.2);
+    }
+
+    &.is-empty {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    &[type="password"] {
+      font: small-caption;
+      font-size: 16px;
+      line-height: 36px;
+    }
+  }
+
+  @include labmod;
+}

@@ -1,0 +1,116 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.Bracket {
+  &-bracket {
+    background-color: $gray0;
+    font-family: 'Titillium Web';
+    min-width: $app-width + 24px;
+
+    &Inner {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  &-roundHeader {
+    cursor: default;
+    fill: $gray4;
+    font-size: 18px;
+    font-weight: 200;
+    text-anchor: middle;
+    text-transform: uppercase;
+  }
+
+  &-g {
+    &Team {
+      &FullySeeded {
+        &A { stop-color: $gray1 }
+        &B { stop-color: mix($gray5, $gray1, 10%) }
+      }
+
+      &Win {
+        &A { stop-color: $gray1 }
+        &B { stop-color: mix($yellow, $gray1, 30%) }
+      }
+
+      &Loss {
+        &A { stop-color: $gray1 }
+        &B { stop-color: $gray0 }
+      }
+
+      &Draw {
+        &A { stop-color: $gray1 }
+        &B { stop-color: mix($cyan, $gray1, 30%) }
+      }
+    }
+
+    &Connection {
+      &Seeded {
+        &A { stop-color: $gray5 }
+        &B { stop-color: $gray1 }
+      }
+
+      &Win {
+        &A { stop-color: $yellow }
+        &B { stop-color: $gray1 }
+      }
+    }
+  }
+
+  &-standings {
+    background-color: $gray03;
+    line-height: 32px;
+    padding: 64px 0;
+    text-align: right;
+    font-family: 'Titillium Web';
+    font-size: 16px;
+
+    table {
+      border-collapse: separate;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    th, td {
+      background-clip: padding-box;
+      border-bottom: 2px solid transparent;
+      border-top: 2px solid transparent;
+      padding: 0 16px;
+    }
+
+    thead > tr {
+      text-transform: uppercase;
+
+      th {
+        padding-top: 12px;
+      }
+    }
+
+    &Place {
+      padding-left: 0 !important;
+    }
+
+    &Divider {
+      background-color: rgba($gray7, 0.2);
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      min-width: 3px;
+      padding: 0 !important;
+    }
+
+    &Team {
+      text-align: left;
+      width: 99%;
+    }
+
+    &DividerFoot {
+      background-color: rgba($gray7, 0.2);
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      height: 16px !important;
+      padding: 0 !important;
+    }
+  }
+}

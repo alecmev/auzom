@@ -1,0 +1,63 @@
+version: '2'
+services:
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/robots.txt:/robots.txt:ro
+    env_file: nginx/.env
+    links:
+      - backend
+      - frontend
+    network_mode: bridge # https://goo.gl/7ThafB
+
+  backend-common:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./backend:/go/src/app
+      - ./migrations:/migrations
+    env_file: backend/.env
+    environment:
+      - FORCE_COLOR=1
+      - POSTGRES_SSLMODE=disable
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DBNAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    network_mode: bridge
+
+  backend:
+    extends: backend-common
+    links:
+      - postgres
+    command: bash -c 'npm install && gulp; sleep infinity'
+
+  worker:
+    extends: backend-common
+    links:
+      - postgres
+    command: bash -c 'npm install && gulp worker; sleep infinity'
+
+  frontend:
+    image: node:6
+    working_dir: /app
+    expose:
+      - 80
+    volumes:
+      - ./frontend:/app
+    environment:
+      - FORCE_COLOR=1
+    command: bash -c 'npm install && npm start; sleep infinity'
+    network_mode: bridge
+
+  postgres:
+    image: postgres:9.5.4
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 127.0.0.1:5432:5432
+    network_mode: bridge

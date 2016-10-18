@@ -1,0 +1,24 @@
+@import '../utils/utils';
+
+.User {
+  background-color: $gray0;
+  padding: 64px 0;
+
+  .Button--small {
+    margin-left: 12px;
+  }
+
+  &-notAdmin {
+    color: $gray4;
+    text-transform: uppercase;
+  }
+
+  &-isAdmin {
+    color: $yellow;
+    text-transform: uppercase;
+  }
+
+  &-secondary {
+    opacity: 0.5;
+  }
+}

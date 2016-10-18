@@ -1,0 +1,200 @@
+@import 'bourbon';
+@import '../utils/utils';
+
+.Match {
+  &-main {
+    background-color: $gray0;
+    display: flex;
+    align-items: center;
+  }
+
+  &-team {
+    padding: 24px 0;
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    $win1: mix($yellow, $gray0, 10%);
+    $win2: mix($yellow, $gray0, 5%);
+
+    &--win:first-child {
+      background: linear-gradient(to left, $win1, $win2);
+    }
+
+    &--win:not(:first-child) {
+      background: linear-gradient(to right, $win1, $win2);
+    }
+
+    $draw1: mix($cyan, $gray0, 10%);
+    $draw2: mix($cyan, $gray0, 5%);
+
+    &--draw:first-child {
+      background: linear-gradient(to left, $draw1, $draw2);
+    }
+
+    &--draw:not(:first-child) {
+      background: linear-gradient(to right, $draw1, $draw2);
+    }
+  }
+
+  $score-width: 48px;
+  $score-padding: 20px;
+
+  &-vs {
+    width: ($score-width + $score-padding) * 2;
+    text-align: center;
+    font-family: 'Titillium Web';
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  &-score {
+    font-family: 'Titillium Web';
+    font-size: 32px;
+    width: $score-width;
+
+    &:before {
+      display: block;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    &--win {
+      font-weight: 700;
+      color: $yellow;
+
+      &:before {
+        content: 'WIN';
+        font-weight: 400;
+      }
+    }
+
+    &--loss {
+      font-weight: 200;
+
+      &:before {
+        content: 'LOSS';
+        font-weight: 200;
+      }
+    }
+
+    &--draw {
+      font-weight: 700;
+      color: $cyan;
+    }
+
+    &:not(:first-of-type) {
+      text-align: right;
+      padding-right: $score-padding;
+    }
+
+    &:first-of-type {
+      text-align: left;
+      padding-left: $score-padding;
+    }
+  }
+
+  &-logo {
+    width: 96px;
+    height: 96px;
+    display: block;
+    margin: 0 24px;
+  }
+
+  &-logoPlaceholder {
+    width: 96px;
+    height: 96px;
+    display: block;
+    margin: 0 24px;
+    opacity: 0.1;
+    border-radius: 48px;
+    border: 4px solid $gray7; // dotted
+    box-sizing: border-box;
+  }
+
+  &-name {
+    flex: 1;
+    font-size: 20px;
+    font-family: 'Titillium Web';
+    color: $gray4;
+
+    &:first-child {
+      text-align: right;
+    }
+  }
+
+  &-tag {
+    font-size: 36px;
+    margin-bottom: -8px;
+    color: $gray7;
+  }
+
+  &-menu {
+    background-color: $gray03;
+    padding: 16px 0;
+    line-height: 24px;
+    font-family: 'Titillium Web';
+
+    &Inner {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      padding: 0 12px;
+    }
+
+    &Item {
+      color: $gray5;
+      font-size: 16px;
+      padding: 0 8px;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &--title {
+        padding-left: 0;
+        color: $gray3 !important;
+        cursor: default !important;
+        width: 68px;
+      }
+
+      &:hover, &.is-active {
+        color: $yellow;
+      }
+    }
+
+    &Divider {
+      width: 1px;
+      margin: 0 16px;
+      background-color: $gray15;
+    }
+  }
+
+  &-context {
+    background-color: $gray0;
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Titillium Web';
+
+    &--inverted {
+      background-color: $gray03;
+    }
+
+    &When {
+      font-weight: 200;
+      color: $gray5;
+      font-size: 24px;
+      display: inline-block;
+
+      &At {
+        color: $gray3;
+      }
+    }
+
+    &Where {
+      font-weight: 200;
+
+      span {
+        padding: 0 6px;
+      }
+    }
+  }
+}

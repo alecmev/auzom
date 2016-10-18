@@ -1,0 +1,15 @@
+@import '../utils/utils';
+
+.Settings {
+  background-color: $gray0;
+  padding: 64px 0;
+
+  &--lighter {
+    background-color: $gray03;
+  }
+
+  &-inner {
+    margin: 0 auto;
+    width: $form-width;
+  }
+}

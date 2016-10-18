@@ -1,0 +1,63 @@
+@import 'bourbon';
+
+@import '../utils/utils';
+
+.BracketMatch {
+  cursor: pointer;
+
+  &-hover {
+    @include water;
+    fill: transparent;
+    opacity: 0;
+    stroke: $gray7;
+  }
+
+  &-date {
+    @include water;
+    fill: $gray7;
+    opacity: 0;
+  }
+
+  &-dateText {
+    fill: $gray-1;
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 0;
+  }
+
+  &:hover &-hover, &:hover &-date, &:hover &-dateText {
+    opacity: 1;
+  }
+
+  &-team {
+    cursor: pointer !important;
+  }
+
+  &-acc {
+    &--pending {
+      fill: $gray1;
+    }
+
+    &--seeded {
+      fill: $gray5;
+    }
+
+    &--win {
+      fill: $yellow;
+    }
+
+    &--draw {
+      fill: $cyan;
+    }
+  }
+
+  &-connection {
+    cursor: default;
+    fill: none; // change to gray for a cool effect
+    stroke-width: 3px;
+
+    &--pending {
+      stroke: $gray1;
+    }
+  }
+}
