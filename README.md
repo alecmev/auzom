@@ -5,7 +5,7 @@ Esports tournament platform by Auzom Entertainment.
 ### Prerequisites
 
 1. [Install Docker and add yourself to the docker
-   group](https://docs.docker.com/installation/ubuntulinux/).
+   group](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
 * [Install Docker Compose](https://docs.docker.com/compose/install/).
 * Make sure ports `80` and `443` aren't taken.
 
