@@ -242,6 +242,13 @@ off milliseconds/megabytes, since there was a plan to switch to GraphQL and
 [Apollo Client](https://github.com/apollostack/apollo-client) in the near
 future, resulting in many performance issues rendering themselves obsolete.
 
+##### Comments
+
+Well, there aren't many. I believe in self-documenting code. Only the most
+complicated parts have more than a one-liner about them, but, let's be honest
+here, most of the website is plain old self-explanatory
+[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+
 ##### Et cetera
 
 As mentioned, there are ~350 open issues, some about button title typos, some
