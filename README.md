@@ -241,3 +241,11 @@ the client), but it was a conscious choice to not invest any time into shaving
 off milliseconds/megabytes, since there was a plan to switch to GraphQL and
 [Apollo Client](https://github.com/apollostack/apollo-client) in the near
 future, resulting in many performance issues rendering themselves obsolete.
+
+##### Et cetera
+
+As mentioned, there are ~350 open issues, some about button title typos, some
+about multi-week refactors. Most noteworthy shortcomings are outlined above, but
+there are many more, which I intend to move to this repository in the next few
+weeks. However, do report bugs and ways to improve anyway, worst case it's going
+to be a duplicate.
