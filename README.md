@@ -249,6 +249,12 @@ complicated parts have more than a one-liner about them, but, let's be honest
 here, most of the website is plain old self-explanatory
 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
 
+##### Browser compatibility
+
+We care only about the latest browsers. Thankfully, gaming crowd tends to be
+up-to-date. Out of 40K sessions, tracked since June '16, only 8 were made from
+IE 10 and below.
+
 ##### Et cetera
 
 As mentioned, there are ~350 open issues, some about button title typos, some
