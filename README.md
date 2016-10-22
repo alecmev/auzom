@@ -178,10 +178,11 @@ which adds up to ~350 open issues.
 
 There was API black-box testing in the beginning, and some UI testing was
 planned as well, but then I had decided that they were objectively not worth the
-time investment, since they can barely help with security, and other issues
-couldn't possibly be severe enough to damage our image. Since the tests were
-dropped, 4 tournament seasons have been completed successfully, without a single
-problem encountered, so no regrets.
+time investment (the project was taking long enough as it is), since they can
+barely help with security, and other issues couldn't possibly be severe enough
+to damage our image. Since the tests were dropped, 4 tournament seasons have
+been completed successfully, without a single problem encountered. Maybe we were
+just lucky, but we'll never know.
 
 ##### Continuous integration
 
@@ -214,3 +215,28 @@ shutdown immediately, the fatal flaws must be fixed with a custom-made SQL
 script, and the destroyed data must be recovered from the latest backup. Making
 these "fix stuff" SQL scripts in advance is a waste of time, since they are
 quite likely to end up destroying other data without proper modifications.
+
+##### Mobile optimization
+
+There is none, since it would introduce too much overhead for barely any
+advantage in the early stages. 91% of our traffic comes from desktop, so no
+issue there (though, of course, there's some correlation between the usability
+of a website on mobile and the amount of mobile visitors...).
+
+##### Page titles / meta
+
+Page titles would be handy, but there were no complaints from our users, so it
+was a low priority task. Meta-wise, embedability and search engine optimization
+didn't concern us either, we weren't looking for traction quite yet.
+
+##### Server rendering
+
+Was planned, but again, this didn't matter much at our stage.
+
+##### Performance
+
+Both the API and the client are far from being fully optimized (much more so for
+the client), but it was a conscious choice to not invest any time into shaving
+off milliseconds/megabytes, since there was a plan to switch to GraphQL and
+[Apollo Client](https://github.com/apollostack/apollo-client) in the near
+future, resulting in many performance issues rendering themselves obsolete.
