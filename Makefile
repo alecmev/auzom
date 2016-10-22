@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-REG := $(shell . .env && echo $$DOCKER_REGISTRY)
+REG := $(shell . .env.local && echo $$DOCKER_REGISTRY)
 
 api-build:
 	@pushd backend; ../dockerception.sh auzom-api api; docker tag \

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. .env
+. .env.local
 read -sp "Compose admin password: " PWD
 printf "\n"
 echo Fixing privileges...

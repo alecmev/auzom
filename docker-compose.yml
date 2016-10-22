@@ -6,7 +6,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/robots.txt:/robots.txt:ro
-    env_file: nginx/.env
+    env_file: nginx/.env.local
     links:
       - backend
       - frontend
@@ -19,7 +19,7 @@ services:
     volumes:
       - ./backend:/go/src/app
       - ./migrations:/migrations
-    env_file: backend/.env
+    env_file: backend/.env.local
     environment:
       - FORCE_COLOR=1
       - POSTGRES_SSLMODE=disable
@@ -55,7 +55,7 @@ services:
     network_mode: bridge
 
   postgres:
-    image: postgres:9.5.4
+    image: postgres:${POSTGRES_VERSION}
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:

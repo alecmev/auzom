@@ -23,11 +23,12 @@ Esports tournament platform by Auzom Entertainment.
   with `ctrl + c`.
 * **Optional.** Run `./dev-load-prod.sh <dumpfile>` to import a database dump.
 * Run `./dev-migrate.sh`, even if you've imported a dump.
-* The app should be available at `https://<VIRTUAL_HOST>`, see `nginx/.env`.
+* The app should be available at `https://<VIRTUAL_HOST>`, see
+  `nginx/.env.local`.
 
 ### Configuration
 
-##### `nginx/.env`
+##### `nginx/.env.local`
 
 Contains the following:
 
@@ -39,19 +40,19 @@ Consumed by `nginx-proxy` and `letsencrypt-nginx-proxy-companion`.
 
 ---
 
-##### `backend/.env`
+##### `backend/.env.local`
 
 Contains only one variable - `STATIC_HOST` - which should be the same as
-`VIRTUAL_HOST` from `nginx/.env`. Used for CORS and mailing inside the backend,
-nothing else.
+`VIRTUAL_HOST` from `nginx/.env.local`. Used for CORS and mailing inside the
+backend, nothing else.
 
 ---
 
-##### `.env`
+##### `.env.local`
 
 Contains the following:
 
-* `POSTGRES_VERSION`: version of Postgres in deployment
+* Imports `POSTGRES_VERSION` from `.env`, which is tracked by git
 * `POSTGRES_URL_TEMPLATE`: connection string, with `{pwd}` in place of password
 * `DOCKER_REGISTRY`: the registry to push images to
 
