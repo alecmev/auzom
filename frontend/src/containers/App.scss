@@ -46,5 +46,5 @@ li {
 
 // for the on-page-load transition fix in index.js
 .disable-transitions * {
-  @include transition(none !important);
+  transition: none !important;
 }

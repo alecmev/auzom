@@ -128,7 +128,7 @@ export default class SeasonHome extends Component {
     if (!_tournament || !_season) {
       return isLoading ?
         <div className={this.cni()}><Loading /></div> :
-          <NotFound />;
+        <NotFound />;
     }
 
     const tournament = _tournament.toJS();

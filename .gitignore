@@ -1,6 +1,4 @@
-*.bkp
-*.sublime-workspace
-.env.local
+/*.sublime-workspace
 /.backup
-node_modules
-npm-debug.log*
+/.env.local
+/node_modules/

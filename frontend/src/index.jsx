@@ -3,12 +3,10 @@ import 'moment/locale/en-ie'; // needed for Datetime
 
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import WebFont from 'webfontloader';
 
 import App from './containers/App';
 
-injectTapEventPlugin();
 WebFont.load({
   google: {
     families: [

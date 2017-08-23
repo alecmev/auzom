@@ -1,9 +1,7 @@
-@import 'bourbon';
-
 @import '../utils/utils';
 
 .Checkbox {
-  @include user-select(none);
+  user-select: none;
   cursor: default;
   outline: none;
   margin-bottom: 12px;
@@ -34,7 +32,7 @@
     border-top: none;
 
     @include water;
-    @include transform(rotate(-45deg));
+    transform: rotate(-45deg);
     content: '';
     height: 5px;
     left: 6px;

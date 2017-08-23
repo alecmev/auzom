@@ -119,7 +119,7 @@ export default class Game extends Component {
     if (!_game) {
       return isLoading ?
         <div className={this.cni()}><Loading /></div> :
-          <NotFound />;
+        <NotFound />;
     }
 
     const game = _game.toJS();

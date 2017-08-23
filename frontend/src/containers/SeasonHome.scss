@@ -270,12 +270,12 @@
       background-size: cover;
       background-position: center;
       background-repeat: repeat;
-      @include filter(brightness(90%) contrast(80%));
+      filter: brightness(90%) contrast(80%);
     }
 
     &:hover > &Image {
-      @include transform(scale(1.1, 1.1));
-      @include filter(brightness(100%) contrast(100%));
+      transform: scale(1.1, 1.1);
+      filter: brightness(100%) contrast(100%);
     }
 
     &--L {

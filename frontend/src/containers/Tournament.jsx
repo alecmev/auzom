@@ -278,7 +278,7 @@ export default class Tournament extends Component {
     if (!game || !tournament) {
       return isLoading ?
         <div className={this.cni()}><Loading /></div> :
-          <NotFound />;
+        <NotFound />;
     }
 
     const childProps = utils.cloneProps(this.props);

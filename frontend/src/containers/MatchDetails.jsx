@@ -71,24 +71,24 @@ export default class MatchDetails extends Component {
                   })}>
                     not played
                   </div> :
-                    <div className={this.cn({ d: 'scores' })}>
-                      <div className={this.cn({
-                        d: 'score',
-                        m: ['left', (isDraw && 'draw') ||
-                          (x.rawScoreX > x.rawScoreY ? 'win' : 'loss'),
-                          (x.rawScoreXOverride || report.rawScoreXOverride) &&
-                            'cancelledOut',
-                        ],
-                      })}>{x.rawScoreX}</div>
-                      <div className={this.cn({
-                        d: 'score',
-                        m: ['right', (isDraw && 'draw') ||
-                          (x.rawScoreX < x.rawScoreY ? 'win' : 'loss'),
-                          (x.rawScoreYOverride || report.rawScoreYOverride) &&
-                            'cancelledOut',
-                        ],
-                      })}>{x.rawScoreY}</div>
-                    </div>
+                  <div className={this.cn({ d: 'scores' })}>
+                    <div className={this.cn({
+                      d: 'score',
+                      m: ['left', (isDraw && 'draw') ||
+                        (x.rawScoreX > x.rawScoreY ? 'win' : 'loss'),
+                        (x.rawScoreXOverride || report.rawScoreXOverride) &&
+                          'cancelledOut',
+                      ],
+                    })}>{x.rawScoreX}</div>
+                    <div className={this.cn({
+                      d: 'score',
+                      m: ['right', (isDraw && 'draw') ||
+                        (x.rawScoreX < x.rawScoreY ? 'win' : 'loss'),
+                        (x.rawScoreYOverride || report.rawScoreYOverride) &&
+                          'cancelledOut',
+                      ],
+                    })}>{x.rawScoreY}</div>
+                  </div>
                 }
                 {penalties && penalties.toJS().map(y =>
                   <div

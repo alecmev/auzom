@@ -4,26 +4,22 @@ Esports tournament platform by Auzom Entertainment.
 
 ### Prerequisites
 
-1. [Install Docker and add yourself to the docker
-   group](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
-* [Install Docker Compose](https://docs.docker.com/compose/install/).
-* Make sure ports `80` and `443` aren't taken.
+1. [Install
+   Docker](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
+1. [Install Docker Compose](https://docs.docker.com/compose/install/).
+1. Make sure port `3000` isn't taken.
 
 ### Getting started
 
-1. Run `./proxy.sh` to launch
-   [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [letsencrypt-nginx-
-   proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-compa
-   nion).
-* Run `./setup.sh` to do an initial setup.
-* **Optional.** Adjust configuration. See [Configuration](#configuration) for
+1. Run `./setup.sh` to do an initial setup.
+1. **Optional.** Adjust configuration. See [Configuration](#configuration) for
   more.
-* Run `docker-compose up -d` to launch the app.
-* Run `docker-compose logs` and wait until it stops printing stuff rapidly. Exit
-  with `ctrl + c`.
-* **Optional.** Run `./dev-load-prod.sh <dumpfile>` to import a database dump.
-* Run `./dev-migrate.sh`, even if you've imported a dump.
-* The app should be available at `https://<VIRTUAL_HOST>`, see
+1. Run `docker-compose up -d` to launch the app.
+1. Run `docker-compose logs -f` and wait until it stops printing stuff rapidly.
+   Exit with `ctrl + c`.
+1. **Optional.** Run `./dev-load-prod.sh <dumpfile>` to import a database dump.
+1. Run `./dev-migrate.sh`, even if you've imported a dump.
+1. The app should be available at `https://<VIRTUAL_HOST>`, see
   `nginx/.env.local`.
 
 ### Configuration
@@ -76,7 +72,7 @@ container, without killing anything, which can be useful for parallel dependency
 installation.
 
 Once you've bashed in, you might want to restart whatever you've killed, which
-is `gulp` for `backend` and `npm start` for `frontend`.
+is `gulp` for `backend` and `yarn start` for `frontend`.
 
 Haven't seen anybody else [mis]use Docker in such way, but I personally don't
 see anything wrong with this approach (trust me, I've debated with myself about

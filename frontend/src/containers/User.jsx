@@ -151,7 +151,7 @@ export default class User extends Component {
           <div>
             Is admin: {user.isAdmin ?
               <span className={this.cn({ d: 'isAdmin' })}>yes</span> :
-                <span className={this.cn({ d: 'notAdmin' })}>no</span>
+              <span className={this.cn({ d: 'notAdmin' })}>no</span>
             }
             {amAdmin && !user.isAdmin &&
               <Button

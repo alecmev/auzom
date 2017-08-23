@@ -1,4 +1,3 @@
-const bourbon = require('node-bourbon');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -29,27 +28,30 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: `babel${isDev ? '!eslint' : ''}`,
+        loader: `babel-loader${isDev ? '!eslint-loader' : ''}`,
       }, {
         test: /\.scss$/,
         loaders: isDev ? [
-          'style?sourceMap',
-          'css?sourceMap',
-          `sass?sourceMap&sourceMapContents&outputStyle=expanded&includePaths[]=${bourbon.includePaths}`,
+          'style-loader?sourceMap',
+          'css-loader?sourceMap&importLoaders=2',
+          'postcss-loader?sourceMap',
+          'sass-loader?sourceMap&sourceMapContents&outputStyle=expanded',
         ] : undefined,
         loader: isDev ? undefined : ExtractTextPlugin.extract({
           fallbackLoader: 'style',
-          loader: `css!sass?includePaths[]=${bourbon.includePaths}`,
+          loader: 'css-loader?importLoaders=1!postcss-loader!sass-loader',
         }),
       }, {
         test: /\.css$/,
-        loader: isDev ? 'style?sourceMap!css?sourceMap' : 'style!css',
+        loader: isDev ?
+          'style-loader?sourceMap!css-loader?sourceMap' :
+          'style-loader!css-loader',
       }, {
         test: /\.(png|ico|svg)$/,
-        loader: 'file',
+        loader: 'file-loader',
       }, { // needed for react-markdown
         test: /\.json$/,
-        loader: 'json',
+        loader: 'json-loader',
       },
     ],
   },

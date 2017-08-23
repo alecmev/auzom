@@ -1,9 +1,7 @@
-@import 'bourbon';
-
 @import '../utils/utils';
 
 .Button {
-  @include user-select(none);
+  user-select: none;
   @include water;
   border: 2px solid transparent;
   cursor: pointer;

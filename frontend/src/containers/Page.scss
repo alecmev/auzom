@@ -1,9 +1,7 @@
-@import 'bourbon';
-
 @import '../utils/utils';
 
-@include keyframes(flash) {
-  100% { @include transform(rotatex(360deg)) }
+@keyframes flash {
+  100% { transform: rotatex(360deg) }
 }
 
 .Page {
@@ -14,7 +12,7 @@
     position: fixed;
     z-index: 1000;
     @include water;
-    @include transition-property(background-color, border-bottom-color);
+    transition-property: background-color, border-bottom-color;
 
     &.is-expanded {
       background-color: $gray-1 !important;
@@ -45,10 +43,10 @@
         height: 32px;
 
         &.is-loading {
-          @include animation-name(flash);
-          @include animation-duration(1s);
-          @include animation-timing-function($ease-out-quad);
-          @include animation-iteration-count(infinite);
+          animation-name: flash;
+          animation-duration: 1s;
+          animation-timing-function: $ease-out-quad;
+          animation-iteration-count: infinite;
         }
       }
 
@@ -306,14 +304,11 @@
     box-sizing: border-box;
 
     &Inner {
-      @include transition(
-        filter 250ms $ease-out-quad,
-        -webkit-filter 250ms $ease-out-quad
-      );
+      transition: filter 250ms $ease-out-quad;
     }
 
     &.is-muted > &Inner {
-      @include filter(blur(8px));
+      filter: blur(8px);
     }
 
     &::after {

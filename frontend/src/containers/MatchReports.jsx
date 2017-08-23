@@ -77,7 +77,8 @@ export default class MatchReports extends Component {
               {rd ? rdMoment.format('lll') : 'stage end'}
             </span>
           </div>
-          {matchReports && (!matchReports.size ? 'No reports' :
+          {matchReports && (!matchReports.size ?
+            'No reports' :
             <ul>{matchReports.map(x =>
               <MatchReportsItem
                 key={x.get('id')}

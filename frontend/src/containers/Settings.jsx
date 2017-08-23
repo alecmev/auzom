@@ -132,7 +132,7 @@ export default class Settings extends Component {
     if (!resource) {
       return isLoading ?
         <div className={this.cni()}><Loading /></div> :
-          <NotFound />;
+        <NotFound />;
     }
 
     const modified = this.getModified();

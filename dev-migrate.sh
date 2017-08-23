@@ -5,6 +5,5 @@ if [ "$build" == "y" ]; then
   make migrations
 fi
 
-docker run --rm --link $(docker-compose ps -q postgres):postgres \
-  auzom-migrations migrate -url \
-  postgres://postgres:postgres@postgres/postgres?sslmode=disable up
+docker run --rm --network=host auzom-migrations migrate -path . -database \
+  postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable up

@@ -1,20 +1,11 @@
 #!/bin/bash
 
 echo Initializing...
-LOCAL_IP=`hostname -I | awk '{print $1}'`
-
-NGINX_ENV=nginx/.env.local
-echo Generating $NGINX_ENV...
-cat > $NGINX_ENV <<EOF
-VIRTUAL_HOST=$LOCAL_IP
-LETSENCRYPT_HOST=$LOCAL_IP
-LETSENCRYPT_EMAIL=admin@$LOCAL_IP
-EOF
 
 BACKEND_ENV=backend/.env.local
 echo Generating $BACKEND_ENV...
 cat > $BACKEND_ENV <<EOF
-STATIC_HOST=$LOCAL_IP
+STATIC_HOST=localhost:3000
 EOF
 
 ROOT_ENV=.env.local
