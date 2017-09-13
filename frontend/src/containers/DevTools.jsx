@@ -17,5 +17,5 @@ export default createDevTools(
       <LogMonitor theme="eighties" />
       <Dispatcher theme="eighties" />
     </MultipleMonitors>
-  </DockMonitor>
+  </DockMonitor>,
 );

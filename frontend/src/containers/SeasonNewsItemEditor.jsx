@@ -16,7 +16,7 @@ export default class SeasonNewsItemEditor extends Component {
   };
 
   handleSuccess = (x, y) => this.context.router.push(
-    `${this.props.seasonPath}/news/${this.props.isNew ? x.id : y.id}`
+    `${this.props.seasonPath}/news/${this.props.isNew ? x.id : y.id}`,
   );
 
   render() {

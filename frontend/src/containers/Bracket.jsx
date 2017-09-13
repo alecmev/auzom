@@ -52,14 +52,14 @@ export default class Bracket extends Component {
 
   renderGroupStage(rounds, matches) {
     const roundMap = {};
-    for (const round of rounds) {
+    rounds.forEach((round) => {
       roundMap[round.number] = round;
-    }
+    });
 
     const mpr = {}; // matches per round
     let maxMatches = 0;
     let isMaxOdd = false;
-    for (const match of matches) {
+    matches.forEach((match) => {
       mpr[match.bracketRound] = (mpr[match.bracketRound] + 1) || 1;
       if (mpr[match.bracketRound] > maxMatches) {
         maxMatches = mpr[match.bracketRound];
@@ -70,7 +70,7 @@ export default class Bracket extends Component {
       ) {
         isMaxOdd = true;
       }
-    }
+    });
 
     const height = (
       (maxMatches * matchHeight) +
@@ -79,16 +79,17 @@ export default class Bracket extends Component {
     );
 
     const byes = [];
-    for (const round of rounds) {
+    rounds.forEach((round) => {
       if (round.byeTeamId !== null) {
+        const y = (
+          (mpr[round.number] * matchHeight) +
+          ((mpr[round.number] - 1) * pairOuterDistance) +
+          pairInnerDistance
+        );
         byes.push(
           <g
             transform={`translate(
-              ${((round.number - 1) * roundWidth) + roundPadding}, ${
-                (mpr[round.number] * matchHeight) +
-                ((mpr[round.number] - 1) * pairOuterDistance) +
-                pairInnerDistance
-              }
+              ${((round.number - 1) * roundWidth) + roundPadding}, ${y}
             )`}
             key={`bye${round.id}`}
           >
@@ -100,10 +101,10 @@ export default class Bracket extends Component {
               onMouseEnter={this.handleTeamMouseEnter}
               onMouseLeave={this.handleTeamMouseLeave}
             />
-          </g>
+          </g>,
         );
       }
-    }
+    });
 
     return {
       height,
@@ -125,22 +126,22 @@ export default class Bracket extends Component {
 
   renderSingleElimination(rounds, matches) {
     const matchMap = _.keyBy(matches, 'id');
-    for (const match of matches) {
+    matches.forEach((match) => {
       if (match.parentMatchX) {
         match.parentMatchX = matchMap[match.parentMatchX];
       }
       if (match.parentMatchY) {
         match.parentMatchY = matchMap[match.parentMatchY];
       }
-    }
+    });
 
     const lastRound = _.maxBy(rounds, 'number').number;
     let goldMatch;
     let bronzeMatch;
-    for (const match of matches.filter(x => x.bracketRound === lastRound)) {
+    matches.filter(x => x.bracketRound === lastRound).forEach((match) => {
       if (!match.parentMatchXIsLoser) goldMatch = match;
       else bronzeMatch = match;
-    }
+    });
 
     const roundPairHeight = { 1: (matchHeight * 2) + pairInnerDistance };
     for (let i = 2, j = 1; i <= rounds.length; i += 1, j *= 2) {
@@ -170,7 +171,8 @@ export default class Bracket extends Component {
       }
 
       if (match.parentMatchX) {
-        const moveMore = spaceOut(match.parentMatchX, (
+        const moveMore = spaceOut(match.parentMatchX,
+          (
             match.offset +
             teamHeight +
             (teamDistance / 2)
@@ -181,7 +183,8 @@ export default class Bracket extends Component {
       }
 
       if (match.parentMatchY) {
-        spaceOut(match.parentMatchY, (
+        spaceOut(match.parentMatchY,
+          (
             match.offset +
             teamHeight +
             (teamDistance / 2) +
@@ -237,12 +240,12 @@ export default class Bracket extends Component {
     const rounds = _rounds.toJS();
     const matches = _matches.toJS();
 
-    for (const match of matches) {
+    matches.forEach((match) => {
       if (match.scoreX > match.scoreY) match.winner = 'x';
       else if (match.scoreX < match.scoreY) match.winner = 'y';
       else if (match.scoreX !== null) match.winner = 'draw';
       else match.winner = null;
-    }
+    });
 
     let body;
     if (

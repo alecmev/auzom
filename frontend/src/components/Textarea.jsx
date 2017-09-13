@@ -56,10 +56,13 @@ export default class Textarea extends Component {
         })}>
           {this.props.label}
         </div>
-        <div className={this.cn({
-          d: 'modified',
-          s: [!this.props.modified && 'collapsed'],
-        })} title="modified" />
+        <div
+          className={this.cn({
+            d: 'modified',
+            s: [!this.props.modified && 'collapsed'],
+          })}
+          title="modified"
+        />
         <div className={this.cn({
           d: 'resizer',
           s: [!stateValue.length && 'empty'],

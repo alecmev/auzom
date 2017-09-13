@@ -32,25 +32,26 @@ export default class SeasonVideos extends Component {
       `playlistId=${listId}&` +
       'part=snippet&' +
       'maxResults=11&' +
-      'key=AIzaSyAcWyGmRE-2b7plIdTPU_9otkGtz2qNN_k'
+      'key=AIzaSyAcWyGmRE-2b7plIdTPU_9otkGtz2qNN_k',
     )
-    .then(response => response.json())
-    .then(json => this.setState({
-      list: json.items.map(x => ({
-        title: x.snippet.title,
-        publishedAt: new Date(x.snippet.publishedAt),
-        videoId: x.snippet.resourceId.videoId,
-      })),
-    }));
+      .then(response => response.json())
+      .then(json => this.setState({
+        list: json.items.map(x => ({
+          title: x.snippet.title,
+          publishedAt: new Date(x.snippet.publishedAt),
+          videoId: x.snippet.resourceId.videoId,
+        })),
+      }));
   }
 
   handleVideoSelectCache = {};
-  handleVideoSelect = video => (
-    this.handleVideoSelectCache[video] || (
-      this.handleVideoSelectCache[video] =
-      () => this.setState({ video })
-    )
-  );
+  handleVideoSelect = (video) => {
+    if (!this.handleVideoSelectCache[video]) {
+      this.handleVideoSelectCache[video] = () => this.setState({ video });
+    }
+
+    return this.handleVideoSelectCache[video];
+  };
 
   playNext = () => {
     const { list, video } = this.state;
@@ -60,7 +61,7 @@ export default class SeasonVideos extends Component {
   };
 
   scrollActiveItemIntoView = x => x && scrollIntoViewIfNeeded(
-    x, false, { duration: 150 }
+    x, false, { duration: 150 },
   );
 
   render() {

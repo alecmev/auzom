@@ -74,7 +74,7 @@ export default class Settings extends Component {
 
     if (!prevProps || resource !== prevProps.resource) {
       const resourceJS = resource.toJS();
-      for (const [field, { type }] of Object.entries(fields)) {
+      Object.entries(fields).forEach(([field, { type }]) => {
         if (type === 'date' || type === 'datetime') {
           if (resourceJS[field] !== null) {
             // Normalizing the date/time format, as to be able to detect
@@ -87,7 +87,7 @@ export default class Settings extends Component {
             resourceJS[field] = resourceJS[field].toString();
           }
         }
-      }
+      });
 
       this.setState({
         resource: resourceJS,
@@ -104,12 +104,12 @@ export default class Settings extends Component {
     const modified = this.getModified();
     const body = {};
     let modifiedAtAll = false;
-    for (const [field, isModified] of Object.entries(modified)) {
+    Object.entries(modified).forEach(([field, isModified]) => {
       if (isModified) {
         body[field] = values[field];
         modifiedAtAll = true;
       }
-    }
+    });
 
     if (!modifiedAtAll) return;
     updateResource(
@@ -138,7 +138,7 @@ export default class Settings extends Component {
     const modified = this.getModified();
     let modifiedAtAll = false;
     const form = [];
-    for (const [field, isModified] of Object.entries(modified)) {
+    Object.entries(modified).forEach(([field, isModified]) => {
       if (isModified) modifiedAtAll = true;
       const { type, name } = fields[field];
       if (type === 'date') {
@@ -200,7 +200,7 @@ export default class Settings extends Component {
           />,
         );
       }
-    }
+    });
 
     return (
       <div className={this.cni({ m: this.props.lighter && 'lighter' })}>

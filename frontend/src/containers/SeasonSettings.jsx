@@ -16,7 +16,7 @@ const seasonSelector = createSelector(
   seasonSlugSelector,
   (seasons, tournament, slug) => seasons.toList().find(x =>
     x.get('tournamentId') === tournament.get('id') &&
-    x.get('slug') === slug
+    x.get('slug') === slug,
   ),
 );
 

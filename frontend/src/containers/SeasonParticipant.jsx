@@ -118,7 +118,7 @@ export default class SeasonParticipant extends Component {
     if (!season || !team) return null;
     const canAccept = new Date(season.get('signupsClosedAt')) < new Date();
     const amLeader = leaderships && leaderships.find(
-      y => y.get('teamId') === teamId
+      y => y.get('teamId') === teamId,
     );
     return (
       <div className={this.cni({ u: 'sectionSingle' })}>
@@ -174,27 +174,33 @@ export default class SeasonParticipant extends Component {
                 <div className={this.cn({
                   d: 'infoBody',
                   m: !x.isDone && 'red',
-                })}>{
-                  (x.isDone && 'FINISHED') ||
+                })}>
+                  {(x.isDone && 'FINISHED') ||
                   (x.kickedBy && 'KICKED') ||
-                  'QUIT'
-                }</div>
+                  'QUIT'}
+                </div>
               </div>}
               <div className={this.cn({ d: 'infoFiller' })} />
               {amAdmin && !x.leftAt &&
                 <div className={this.cn({ d: 'admin' })}>
                   <Button
-                    text="done" type="important" size="large"
+                    text="done"
+                    type="important"
+                    size="large"
                     meta={x.id}
                     onClick={this.handleDone}
                   />
                   <Button
-                    text="leave" type="important" size="large"
+                    text="leave"
+                    type="important"
+                    size="large"
                     meta={x.id}
                     onClick={this.handleLeave}
                   />
                   <Button
-                    text="kick" type="important" size="large"
+                    text="kick"
+                    type="important"
+                    size="large"
                     meta={x.id}
                     onClick={this.handleKick}
                   />
@@ -254,17 +260,23 @@ export default class SeasonParticipant extends Component {
               {x.decision === null &&
                 <div className={this.cn({ d: 'admin' })}>
                   {amAdmin && canAccept && <Button
-                    text="accept" type="important" size="large"
+                    text="accept"
+                    type="important"
+                    size="large"
                     meta={x.id}
                     onClick={this.handleAccept}
                   />}
                   {amAdmin && <Button
-                    text="decline" type="important" size="large"
+                    text="decline"
+                    type="important"
+                    size="large"
                     meta={x.id}
                     onClick={this.handleDecline}
                   />}
                   {amLeader && <Button
-                    text="cancel" type="important" size="large"
+                    text="cancel"
+                    type="important"
+                    size="large"
                     meta={x.id}
                     onClick={this.handleCancel}
                   />}

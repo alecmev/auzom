@@ -27,7 +27,7 @@ const bracketRoundSelector = createSelector(
   (bracket2Rounds, match) => bracket2Rounds && match && bracket2Rounds.find(
     x =>
       x.get('bracketId') === match.get('bracketId') &&
-      x.get('number') === match.get('bracketRound')
+      x.get('number') === match.get('bracketRound'),
   ),
 );
 
@@ -130,9 +130,7 @@ export default class Match extends Component {
     this.load(nextProps, this.props);
   }
 
-  load({
-    matchId, matchLeadership, matchMaps, matchReportId, matchRounds,
-  }, prevProps) {
+  load({ matchId, matchLeadership, matchMaps, matchReportId }, prevProps) {
     if (!matchId) return;
     const force = !prevProps || matchId !== prevProps.matchId;
     if (force || (!matchLeadership && prevProps.matchLeadership)) {
@@ -351,7 +349,7 @@ export default class Match extends Component {
           </div>
           <div className={this.cn({ d: 'contextWhere' })}>
             {matchMaps && matchMaps.filter(x => !x.get('isBan')).toJS().map(x =>
-              <span key={x.id}>{gameMaps.getIn([x.gameMapId, 'name'])}</span>
+              <span key={x.id}>{gameMaps.getIn([x.gameMapId, 'name'])}</span>,
             )}
           </div>
         </div>

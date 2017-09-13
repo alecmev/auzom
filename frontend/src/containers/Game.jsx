@@ -38,7 +38,7 @@ const myOwnershipSelector = createSelector(
   (x, myId, gameId) => x.toList().find(y =>
     y.get('userId') === myId &&
     y.get('gameId') === gameId &&
-    y.get('nullifiedAt') === null
+    y.get('nullifiedAt') === null,
   ),
 );
 
@@ -176,7 +176,9 @@ export default class Game extends Component {
                 {myId && !myOwnership && <div>
                   <Button
                     className={this.cn({ d: 'addButton' })}
-                    text="add to my account" type="important" size="large"
+                    text="add to my account"
+                    type="important"
+                    size="large"
                     onClick={this.handleAddClick}
                   />
                   <div className={this.cn({ d: 'disclaimer' })}>
@@ -210,7 +212,9 @@ export default class Game extends Component {
                   </div>
                   <Button
                     className={this.cn({ d: 'statusButton' })}
-                    text="check status" type="important" size="large"
+                    text="check status"
+                    type="important"
+                    size="large"
                     onClick={this.handleStatusClick}
                   />
                   <div className={this.cn({
@@ -218,7 +222,9 @@ export default class Game extends Component {
                     m: 'right',
                   })}>
                     <Button
-                      text="cancel the process" type="important" size="small"
+                      text="cancel the process"
+                      type="important"
+                      size="small"
                       onClick={this.handleNullifyClick}
                     />
                   </div>
@@ -238,7 +244,7 @@ export default class Game extends Component {
                         </a>
                       </div>
                     </div>
-                    {[...myOwnership.get('data').entries()].map(x =>
+                    {[...myOwnership.get('data').entries()].map(x => (
                       <div key={x[0]}>
                         <div className={this.cn({ d: 'dataKey' })}>
                           {userGameDataKeys[x[0]] || x[0]}
@@ -247,12 +253,14 @@ export default class Game extends Component {
                           {x[1]}
                         </div>
                       </div>
-                    )}
+                    ))}
                   </div>
                   <div className={this.cn({ d: 'nullifyButtonWrapper' })}>
                     <Button
-                      text="remove from my account" type="important"
-                      size="small" onClick={this.handleNullifyClick}
+                      text="remove from my account"
+                      type="important"
+                      size="small"
+                      onClick={this.handleNullifyClick}
                     />
                   </div>
                 </div>}

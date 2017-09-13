@@ -79,7 +79,7 @@ export default class MatchReports extends Component {
           </div>
           {matchReports && (!matchReports.size ?
             'No reports' :
-            <ul>{matchReports.map(x =>
+            <ul>{matchReports.map(x => (
               <MatchReportsItem
                 key={x.get('id')}
                 matchReport={x}
@@ -88,7 +88,7 @@ export default class MatchReports extends Component {
                 matchId={matchId}
                 linkPrefix={linkPrefix}
               />
-            )}</ul>
+            ))}</ul>
           )}
         </div>
       </div>

@@ -63,14 +63,21 @@ export default class Datetime extends Component {
         })}>
           {this.props.label}
         </div>
-        <div className={this.cn({
-          d: 'modified',
-          s: [!this.props.modified && 'collapsed'],
-        })} title="modified" />
-        <button className={this.cn({
-          d: 'clear',
-          s: [!value && 'hidden'],
-        })} title="clear" onClick={this.handleClear}>×</button>
+        <div
+          className={this.cn({
+            d: 'modified',
+            s: [!this.props.modified && 'collapsed'],
+          })}
+          title="modified"
+        />
+        <button
+          className={this.cn({
+            d: 'clear',
+            s: [!value && 'hidden'],
+          })}
+          title="clear"
+          onClick={this.handleClear}
+        >×</button>
       </div>
     );
   }

@@ -16,11 +16,11 @@ export default class TournamentSeasons extends Component {
       <div className={this.cni({ u: 'sectionSingle' })}>
         <div className={this.cn({ u: 'sectionMargined' })}>
           All seasons
-          <ul>{tournamentSeasons.toJS().map(x =>
+          <ul>{tournamentSeasons.toJS().map(x => (
             <li key={x.id}>
               <Link to={`${tournamentPath}/${x.slug}`}>{x.name}</Link>
             </li>
-          )}</ul>
+          ))}</ul>
         </div>
       </div>
     );

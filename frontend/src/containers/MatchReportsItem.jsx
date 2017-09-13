@@ -62,7 +62,9 @@ export default class MatchReportsItem extends Component {
         &nbsp;{x.scoreX} - {x.scoreY} / {x.rawScoreX} - {x.rawScoreY}
         {x.teamBy && ((myTeamId && myTeamId !== x.teamBy) || amAdmin) &&
           <Button
-            text="agree" type="important" size="small"
+            text="agree"
+            type="important"
+            size="small"
             onClick={this.handleAgree}
           />
         }

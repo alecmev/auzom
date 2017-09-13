@@ -12,9 +12,9 @@ const activeTeamsSelector = createSelector(
   selectors.teams,
   teams =>
     teams.toList().filter(x =>
-      x.get('disbandedAt') === null
+      x.get('disbandedAt') === null,
     ).sort((a, b) =>
-      a.get('name').localeCompare(b.get('name'))
+      a.get('name').localeCompare(b.get('name')),
     ),
 );
 
@@ -44,13 +44,13 @@ export default class Teams extends Component {
           <span className={this.cn({ d: 'secondary' })}>
             &nbsp;[{activeTeams.size}]
           </span>
-          <ul>{activeTeams.toJS().map(team =>
+          <ul>{activeTeams.toJS().map(team => (
             <li key={team.id}>
               <Link to={`/teams/${team.id}`}>
                 [{team.abbr}] {team.name}
               </Link>
             </li>
-          )}</ul>
+          ))}</ul>
         </div>
       </div>
     );

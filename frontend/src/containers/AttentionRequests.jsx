@@ -83,26 +83,26 @@ export default class AttentionRequests extends Component {
         <div className={this.cn({ u: 'sectionMargined' })}>
           {attentionRequests && !attentionRequests.size && 'No requests'}
           {pending && pending.size && <div>Pending:
-            <ul>{pending.toJS().map(x =>
+            <ul>{pending.toJS().map(x => (
               <li key={x.id}>
                 [{users.getIn([x.createdBy, 'nickname'])}] {x.message}
               </li>
-            )}</ul>
+            ))}</ul>
           </div>}
           {claimed && !!claimed.size && <div>In progress:
-            <ul>{claimed.toJS().map(x =>
+            <ul>{claimed.toJS().map(x => (
               <li key={x.id}>
                 [{users.getIn([x.createdBy, 'nickname'])}] {x.message}
               </li>
-            )}</ul>
+            ))}</ul>
           </div>}
           {resolved && !!resolved.size && <div>Resolved:
-            <ul>{resolved.toJS().map(x =>
+            <ul>{resolved.toJS().map(x => (
               <li key={x.id}>
                 {x.isDiscarded ? '[DISCARDED] ' : ''}
                 [{users.getIn([x.createdBy, 'nickname'])}] {x.message}
               </li>
-            )}</ul>
+            ))}</ul>
           </div>}
         </div>
       </div>

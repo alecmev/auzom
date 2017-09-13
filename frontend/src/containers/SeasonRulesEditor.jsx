@@ -19,7 +19,7 @@ export default class SeasonRulesEditor extends Component {
   };
 
   handleSuccess = () => this.context.router.push(
-    `${this.props.seasonPath}/rules`
+    `${this.props.seasonPath}/rules`,
   );
 
   render() {

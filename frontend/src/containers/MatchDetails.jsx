@@ -74,23 +74,27 @@ export default class MatchDetails extends Component {
                   <div className={this.cn({ d: 'scores' })}>
                     <div className={this.cn({
                       d: 'score',
-                      m: ['left', (isDraw && 'draw') ||
-                        (x.rawScoreX > x.rawScoreY ? 'win' : 'loss'),
+                      m: [
+                        'left',
+                        (isDraw && 'draw') ||
+                          (x.rawScoreX > x.rawScoreY ? 'win' : 'loss'),
                         (x.rawScoreXOverride || report.rawScoreXOverride) &&
                           'cancelledOut',
                       ],
                     })}>{x.rawScoreX}</div>
                     <div className={this.cn({
                       d: 'score',
-                      m: ['right', (isDraw && 'draw') ||
-                        (x.rawScoreX < x.rawScoreY ? 'win' : 'loss'),
+                      m: [
+                        'right',
+                        (isDraw && 'draw') ||
+                          (x.rawScoreX < x.rawScoreY ? 'win' : 'loss'),
                         (x.rawScoreYOverride || report.rawScoreYOverride) &&
                           'cancelledOut',
                       ],
                     })}>{x.rawScoreY}</div>
                   </div>
                 }
-                {penalties && penalties.toJS().map(y =>
+                {penalties && penalties.toJS().map(y => (
                   <div
                     key={y.id}
                     className={this.cn({ d: 'penalty' })}
@@ -113,7 +117,7 @@ export default class MatchDetails extends Component {
                       </span> {y.reason}
                     </div>
                   </div>
-                )}
+                ))}
                 {isOverridden &&
                   <div className={this.cn({ d: 'penalty' })}>
                     <div className={this.cn({
@@ -137,7 +141,7 @@ export default class MatchDetails extends Component {
             );
           })}
           <div className={this.cn({ d: 'rule' })} />
-          {matchWidePenalties && matchWidePenalties.toJS().map(x =>
+          {matchWidePenalties && matchWidePenalties.toJS().map(x => (
             <div
               key={x.id}
               className={this.cn({ d: 'penalty' })}
@@ -158,7 +162,7 @@ export default class MatchDetails extends Component {
                 </span> {x.reason}
               </div>
             </div>
-          )}
+          ))}
           {isOverriddenGlobally &&
             <div className={this.cn({ d: 'penalty' })}>
               <div className={this.cn({
@@ -197,7 +201,7 @@ export default class MatchDetails extends Component {
             })}>{report.rawScoreY}</div>
           </div>
           <div className={this.cn({ d: 'rule' })} />
-          {matchWidePenalties && matchWidePenalties.toJS().map(x =>
+          {matchWidePenalties && matchWidePenalties.toJS().map(x => (
             <div
               key={x.id}
               className={this.cn({ d: 'penalty' })}
@@ -218,7 +222,7 @@ export default class MatchDetails extends Component {
                 </span> {x.reason}
               </div>
             </div>
-          )}
+          ))}
           {(report.scoreXOverride !== null || report.scoreYOverride !== null) &&
             <div className={this.cn({ d: 'penalty' })}>
               <div className={this.cn({

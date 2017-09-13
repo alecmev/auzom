@@ -36,12 +36,11 @@ export default class UserSettings extends Component {
         'you need to be logged in to change your settings', true,
       );
       browserHistory.push('/login');
-      return;
     }
   }
 
   handleSuccess = m => this.props.messagePush(
-    `settings saved${m.email ? ', check your email' : ''}`
+    `settings saved${m.email ? ', check your email' : ''}`,
   );
 
   render() {

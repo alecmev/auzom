@@ -23,8 +23,8 @@ const membersSelector = createSelector(
   (userTeams, teamId) =>
     userTeams.toList().filter(x =>
       x.get('teamId') === teamId &&
-      x.get('leftAt') === null
-    )
+      x.get('leftAt') === null,
+    ),
 );
 
 const myMembershipSelector = createSelector(
@@ -91,7 +91,6 @@ export default class TeamSettings extends Component {
         'you need to be a leader or an admin to change team settings', true,
       );
       browserHistory.push('/');
-      return;
     }
   }
 

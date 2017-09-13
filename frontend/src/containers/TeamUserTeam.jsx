@@ -50,17 +50,23 @@ export default class TeamUserTeam extends Component {
         </span>
         {amCapable && !item.isLeader &&
           <Button
-            text="promote" type="important" size="small"
+            text="promote"
+            type="important"
+            size="small"
             onClick={this.handlePromote}
           />
         }{amCapable && item.isLeader && leaderCount > 1 &&
           <Button
-            text="demote" type="important" size="small"
+            text="demote"
+            type="important"
+            size="small"
             onClick={this.handleDemote}
           />
         }{!isMe && amCapable && (!item.isLeader || leaderCount > 1) &&
           <Button
-            text="kick" type="important" size="small"
+            text="kick"
+            type="important"
+            size="small"
             onClick={this.handleKick}
           />
         }

@@ -38,7 +38,8 @@ export default class BracketStanding extends Component {
     this.props.onMouseLeave &&
     this.props.onMouseLeave();
   handleClick = () => this.context.router.push(
-    `${this.props.seasonPath}/participants/${this.props.standing.get('teamId')}`
+    `${this.props.seasonPath}/participants/` +
+    `${this.props.standing.get('teamId')}`,
   );
 
   render() {

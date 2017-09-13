@@ -37,7 +37,7 @@ export default class Component extends ReactComponent {
       map(utilities, 'u-'),
       (!utilities || descendant || modifiers || force) && base,
       map(modifiers, `${base}--`),
-      map(states, 'is-')
+      map(states, 'is-'),
     );
   }
 
@@ -49,10 +49,16 @@ export default class Component extends ReactComponent {
 
   refCache = {}
   r = {}
-  rcb = name => (
-    this.refCache[name] ||
-    (this.refCache[name] = x => (this.r[name] = x))
-  )
+  rcb = (name) => {
+    if (!this.refCache[name]) {
+      this.refCache[name] = (x) => {
+        this.r[name] = x;
+        return this.r[name];
+      };
+    }
+
+    return this.refCache[name];
+  }
 }
 
 // TODO: make sure the "utilities + base" heuristics don't have any undesired

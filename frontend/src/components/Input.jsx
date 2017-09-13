@@ -59,10 +59,13 @@ export default class Input extends Component {
         })}>
           {this.props.label}
         </div>
-        <div className={this.cn({
-          d: 'modified',
-          s: [!this.props.modified && 'collapsed'],
-        })} title="modified" />
+        <div
+          className={this.cn({
+            d: 'modified',
+            s: [!this.props.modified && 'collapsed'],
+          })}
+          title="modified"
+        />
       </div>
     );
   }

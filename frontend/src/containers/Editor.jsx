@@ -69,11 +69,11 @@ export default class Editor extends Component {
     }), {});
   }
 
-  load({ isNew, resourceName, resource, fields }, prevProps) {
+  load({ isNew, resource, fields }, prevProps) {
     if (isNew || !resource) return;
     if (!prevProps || resource !== prevProps.resource) {
       const resourceJS = resource.toJS();
-      for (const [field, { type }] of Object.entries(fields)) {
+      Object.entries(fields).forEach(([field, { type }]) => {
         if (type === 'date' || type === 'datetime') {
           if (resourceJS[field] !== null) {
             resourceJS[field] = moment(resourceJS[field]).toISOString();
@@ -83,7 +83,7 @@ export default class Editor extends Component {
             resourceJS[field] = resourceJS[field].toString();
           }
         }
-      }
+      });
 
       this.setState({
         original: resourceJS,
@@ -107,25 +107,25 @@ export default class Editor extends Component {
         onSuccess : (...args) => {
           messagePush(`created a ${resourceName || 'resource'}`);
           onSuccess && onSuccess(...args);
-        }
+        },
       );
     } else {
       const modified = this.getModified();
       const body = {};
       let modifiedAtAll = false;
-      for (const [field, isModified] of Object.entries(modified)) {
+      Object.entries(modified).forEach(([field, isModified]) => {
         if (isModified) {
           body[field] = values[field];
           modifiedAtAll = true;
         }
-      }
+      });
 
       if (!modifiedAtAll) return;
       updateResource(values.id, body, noMessage ?
         onSuccess && onSuccess.bind(null, modified) : (...args) => {
           messagePush(`${resourceName || 'resource'} saved`);
           onSuccess && onSuccess(modified, ...args);
-        }
+        },
       );
     }
   };
@@ -142,10 +142,10 @@ export default class Editor extends Component {
     const form = [];
     let left = [];
     let right = [];
-    for (const [field, isModified] of Object.entries(modified)) {
+    Object.entries(modified).forEach(([field, isModified]) => {
       if (isModified) modifiedAtAll = true;
       const { type, name, preview, standalone, onlyNew } = fields[field];
-      if (onlyNew && !isNew) continue;
+      if (onlyNew && !isNew) return; // continue
       else if (standalone) {
         form.push([left, right]);
         left = [];
@@ -219,7 +219,7 @@ export default class Editor extends Component {
               key={field}
               className={this.cn({ d: 'rightImg' })}
               src={values[field]}
-            />
+            />,
           );
         }
       } else if (preview === 'title') {
@@ -233,7 +233,7 @@ export default class Editor extends Component {
         left = [];
         right = [];
       }
-    }
+    });
 
     const submitButton = (
       <Button
@@ -256,6 +256,7 @@ export default class Editor extends Component {
       <div className={this.cni()}>
         <div className={this.cn({ d: 'inner' })}>
           {form.map(([l, r], i) => (
+            // eslint-disable-next-line react/no-array-index-key
             <div key={i} className={this.cn({ d: 'section' })}>
               <div className={this.cn({ d: 'left' })}>{l}</div>
               <div className={this.cn({ d: 'right' })}>{r}</div>

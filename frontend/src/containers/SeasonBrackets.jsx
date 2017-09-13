@@ -239,7 +239,7 @@ export default class SeasonBrackets extends Component {
                 stage
               </div>
               <div className={this.cn({ d: 'menuDivider' })} />
-              {seasonStages && seasonStages.map(x =>
+              {seasonStages && seasonStages.map(x => (
                 <Link
                   key={x.get('id')}
                   to={`${bracketsPath}/${x.get('slug')}`}
@@ -248,7 +248,7 @@ export default class SeasonBrackets extends Component {
                 >
                   {x.get('name')}
                 </Link>
-              ).toJS()}
+              )).toJS()}
               {amAdmin && <Link
                 to={`${bracketsPath}/_/new-stage`}
                 className={this.cn({ d: 'menuItem' })}
@@ -266,7 +266,7 @@ export default class SeasonBrackets extends Component {
                 bracket
               </div>
               <div className={this.cn({ d: 'menuDivider' })} />
-              {stageBrackets.map(x =>
+              {stageBrackets.map(x => (
                 <Link
                   key={x.get('id')}
                   to={`${bracketsPath}/${stage.get('slug')}/${x.get('slug')}`}
@@ -275,7 +275,7 @@ export default class SeasonBrackets extends Component {
                 >
                   {x.get('name')}
                 </Link>
-              ).toJS()}
+              )).toJS()}
               {amAdmin && <Link
                 to={`${bracketsPath}/${stage.get('slug')}/_/new-bracket`}
                 className={this.cn({ d: 'menuItem' })}
@@ -311,7 +311,8 @@ export default class SeasonBrackets extends Component {
                 bracket settings
               </Link>}
               {bracket && !isSwiss &&
-              bracketMatches && !!bracketMatches.size && (() => {
+              bracketMatches && !!bracketMatches.size &&
+              (() => {
                 const match = bracketMatches.first().toJS();
                 if (match.teamX || match.teamY) return null;
                 return (

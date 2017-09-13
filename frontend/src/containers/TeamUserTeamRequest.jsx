@@ -28,13 +28,13 @@ export default class TeamUserTeamRequest extends Component {
 
   handleDeclineApplication = () => {
     this.props.patchUserTeamRequest(this.props.item.id, 'no', () =>
-      this.props.messagePush('declined an application to a team')
+      this.props.messagePush('declined an application to a team'),
     );
   };
 
   handleCancelInvite = () => {
     this.props.patchUserTeamRequest(this.props.item.id, 'no', () =>
-      this.props.messagePush('cancelled an invite to a team')
+      this.props.messagePush('cancelled an invite to a team'),
     );
   };
 
@@ -50,7 +50,7 @@ export default class TeamUserTeamRequest extends Component {
 
   handleDeny = () => {
     this.props.patchUserTeamRequest(this.props.item.id, 'no', () =>
-      this.props.messagePush('denied a user-team request')
+      this.props.messagePush('denied a user-team request'),
     );
   };
 
@@ -74,27 +74,37 @@ export default class TeamUserTeamRequest extends Component {
         </span>
         {amLeader && item.userDecision && !item.leaderDecision &&
           <Button
-            text="accept" type="important" size="small"
+            text="accept"
+            type="important"
+            size="small"
             onClick={this.handleAcceptApplication}
           />
         }{amLeader && item.userDecision &&
           <Button
-            text="decline" type="important" size="small"
+            text="decline"
+            type="important"
+            size="small"
             onClick={this.handleDeclineApplication}
           />
         }{amLeader && item.leaderDecision && !item.userDecision &&
           <Button
-            text="cancel invite" type="important" size="small"
+            text="cancel invite"
+            type="important"
+            size="small"
             onClick={this.handleCancelInvite}
           />
         }{amAdmin && item.adminDecision === null &&
           <Button
-            text="approve" type="important" size="small"
+            text="approve"
+            type="important"
+            size="small"
             onClick={this.handleApprove}
           />
         }{amAdmin && (item.adminDecision === null || item.adminDecidedAt) &&
           <Button
-            text="deny" type="important" size="small"
+            text="deny"
+            type="important"
+            size="small"
             onClick={this.handleDeny}
           />
         }

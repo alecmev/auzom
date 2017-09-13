@@ -18,7 +18,7 @@ const userIdSelector = (state, props) => props.params.id;
 const userSelector = createSelector(
   selectors.users,
   userIdSelector,
-  utils.get
+  utils.get,
 );
 
 const mshipsSelector = createSelector(
@@ -28,7 +28,7 @@ const mshipsSelector = createSelector(
   (userTeams, userId, teams) =>
     userTeams.toList().filter(x =>
       x.get('userId') === userId &&
-      x.get('leftAt') === null
+      x.get('leftAt') === null,
     ).sort((a, b) => {
       const leadership = +b.get('isLeader') - +a.get('isLeader');
       if (leadership !== 0) return leadership;
@@ -45,7 +45,7 @@ const pastMshipsSelector = createSelector(
   (userTeams, userId) =>
     userTeams.toList().filter(x =>
       x.get('userId') === userId &&
-      x.get('leftAt') !== null
+      x.get('leftAt') !== null,
     ).sort((a, b) => a.get('id') - b.get('id')),
 );
 
@@ -55,7 +55,7 @@ const userGamesSelector = createSelector(
   (x, userId) => x.toList().filter(y =>
     y.get('userId') === userId &&
     y.get('verifiedAt') !== null &&
-    y.get('nullifiedAt') === null
+    y.get('nullifiedAt') === null,
   ),
 );
 
@@ -155,13 +155,17 @@ export default class User extends Component {
             }
             {amAdmin && !user.isAdmin &&
               <Button
-                text="give admin" type="important" size="small"
+                text="give admin"
+                type="important"
+                size="small"
                 onClick={this.handleGiveAdmin}
               />
             }
             {amAdmin && user.isAdmin &&
               <Button
-                text="remove admin" type="important" size="small"
+                text="remove admin"
+                type="important"
+                size="small"
                 onClick={this.handleRemoveAdmin}
               />
             }
@@ -232,19 +236,27 @@ export default class User extends Component {
                       ${moment(x.dataUpdateRequestedAt).fromNow()}
                     `}</span>
                     <Button
-                      text="refresh" type="important" size="small"
-                      meta={x.id} onClick={this.handleRefreshClick}
+                      text="refresh"
+                      type="important"
+                      size="small"
+                      meta={x.id}
+                      onClick={this.handleRefreshClick}
                     />
                   </span> : <Button
-                    text="request update" type="important" size="small"
-                    meta={x.id} onClick={this.handleUpdateRequestClick}
+                    text="request update"
+                    type="important"
+                    size="small"
+                    meta={x.id}
+                    onClick={this.handleUpdateRequestClick}
                   />}
                 </li>
               );
             })}</ul>,
           ]}
           {!userGames.size && myId === user.id && <Button
-            text="add battlefield 4..." type="important" size="large"
+            text="add battlefield 4..."
+            type="important"
+            size="large"
             href="/battlefield-4"
           />}
         </div>

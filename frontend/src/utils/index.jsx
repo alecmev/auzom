@@ -9,11 +9,7 @@ export function get(map, id) {
 export function isSame(x, y, fields) {
   if (x === y) return true;
   if (!x || !y) return false;
-  for (const field of fields) {
-    if (x.get(field) !== y.get(field)) return false;
-  }
-
-  return true;
+  return fields.every(field => x.get(field) === y.get(field));
 }
 
 export const userGameDataKeys = {

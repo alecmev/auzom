@@ -30,7 +30,7 @@ const membersSelector = createSelector(
   (userTeams, teamId, users) =>
     userTeams.toList().filter(x =>
       x.get('teamId') === teamId &&
-      x.get('leftAt') === null
+      x.get('leftAt') === null,
     ).sort((a, b) => {
       const leadership = +b.get('isLeader') - +a.get('isLeader');
       if (leadership !== 0) return leadership;
@@ -53,7 +53,7 @@ const requestsSelector = createSelector(
   (userTeamRequests, teamId) =>
     userTeamRequests.toList().filter(x =>
       x.get('teamId') === teamId &&
-      x.get('decision') === null
+      x.get('decision') === null,
     ).sort((a, b) => a.get('id') - b.get('id')),
 );
 
@@ -69,7 +69,7 @@ const pastMembersSelector = createSelector(
   (userTeams, teamId) =>
     userTeams.toList().filter(x =>
       x.get('teamId') === teamId &&
-      x.get('leftAt') !== null
+      x.get('leftAt') !== null,
     ).sort((a, b) => a.get('id') - b.get('id')),
 );
 
@@ -173,13 +173,13 @@ export default class Team extends Component {
 
   handleDeclineInvite = () => {
     this.props.patchUserTeamRequest(this.props.myRequest.get('id'), 'no', () =>
-      this.props.messagePush('declined an invite to a team')
+      this.props.messagePush('declined an invite to a team'),
     );
   };
 
   handleCancelApplication = () => {
     this.props.patchUserTeamRequest(this.props.myRequest.get('id'), 'no', () =>
-      this.props.messagePush('cancelled an application to a team')
+      this.props.messagePush('cancelled an application to a team'),
     );
   };
 
@@ -233,7 +233,9 @@ export default class Team extends Component {
       if (!amLeader || leaderCount > 1) {
         mainButton = (
           <Button
-            text="leave" type="important" size="small"
+            text="leave"
+            type="important"
+            size="small"
             onClick={this.handleLeave}
           />
         );
@@ -242,18 +244,24 @@ export default class Team extends Component {
       if (myRequest.get('userDecision') === null) {
         mainButton = [
           <Button
-            text="accept invite" type="important" size="small"
+            text="accept invite"
+            type="important"
+            size="small"
             onClick={this.handleAcceptInvite}
           />,
           <Button
-            text="decline invite" type="important" size="small"
+            text="decline invite"
+            type="important"
+            size="small"
             onClick={this.handleDeclineInvite}
           />,
         ];
       } else {
         mainButton = (
           <Button
-            text="cancel application" type="important" size="small"
+            text="cancel application"
+            type="important"
+            size="small"
             onClick={this.handleCancelApplication}
           />
         );
@@ -261,7 +269,9 @@ export default class Team extends Component {
     } else if (myId) {
       mainButton = (
         <Button
-          text="apply" type="important" size="small"
+          text="apply"
+          type="important"
+          size="small"
           onClick={this.handleApply}
         />
       );
@@ -272,7 +282,9 @@ export default class Team extends Component {
           Team: [{team.abbr}] {team.name} {mainButton}
           {amAdmin &&
             <Button
-              text="disband" type="important" size="small"
+              text="disband"
+              type="important"
+              size="small"
               onClick={this.handleDisband}
             />
           }

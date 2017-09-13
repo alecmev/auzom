@@ -55,10 +55,13 @@ export default class Checkbox extends Component {
           })} />
           <div className={this.cn({ d: 'label' })}>{this.props.label}</div>
         </div>
-        <div className={this.cn({
-          d: 'modified',
-          s: [!this.props.modified && 'collapsed'],
-        })} title="modified" />
+        <div
+          className={this.cn({
+            d: 'modified',
+            s: [!this.props.modified && 'collapsed'],
+          })}
+          title="modified"
+        />
       </div>
     );
   }

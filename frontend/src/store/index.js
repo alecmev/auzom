@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import reduxPersistCrosstab from 'redux-persist-crosstab';
-import reduxPersistImmutable from 'redux-persist-immutable';
+import reduxPersistTransformImmutable from 'redux-persist-transform-immutable';
 import thunkMiddleware from 'redux-thunk';
 import { createSelector } from 'reselect';
 
@@ -36,10 +36,8 @@ if (module.hot) {
 reduxPersistCrosstab(
   persistStore(store, {
     whitelist: ['session'],
-    transforms: [reduxPersistImmutable],
-  }), {
-    whitelist: ['session'],
-  }
+    transforms: [reduxPersistTransformImmutable()],
+  }),
 );
 
 // TODO: move this stuff elsewhere
@@ -56,6 +54,6 @@ const messageSelector = createSelector(
         5000,
       );
     }
-  }
+  },
 );
 store.subscribe(() => messageSelector(store.getState()));

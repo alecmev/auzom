@@ -130,11 +130,14 @@ export default class Page extends Component {
 
     return (
       <div className={this.cni()}>
-        <div className={this.cn({
-          u: 'sectionSingle',
-          d: 'header',
-          s: [isScrolled && 'scrolled', isExpanded && 'expanded'],
-        })} style={{ left: -this.state.scrollX }}>
+        <div
+          className={this.cn({
+            u: 'sectionSingle',
+            d: 'header',
+            s: [isScrolled && 'scrolled', isExpanded && 'expanded'],
+          })}
+          style={{ left: -this.state.scrollX }}
+        >
           <div className={this.cn({ u: 'sectionMargined' })}>
             <div className={this.cn({ d: 'menu' })}>
               <div className={this.cn({ d: 'menuLogo' })}>

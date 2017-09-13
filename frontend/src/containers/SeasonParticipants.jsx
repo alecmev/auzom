@@ -20,7 +20,7 @@ export default class SeasonParticipants extends Component {
     if (!participants || !applications) return null;
 
     const participantsItems = [];
-    for (const x of participants.toJS()) {
+    participants.toJS().forEach((x) => {
       const team = teams.get(x.teamId);
       participantsItems.push(
         <Link
@@ -48,14 +48,12 @@ export default class SeasonParticipants extends Component {
           {x.leftAt && <div className={this.cn({ d: 'done' })}>
             {x.isDone ? '✔' : '❗'}
           </div>}
-        </Link>
+        </Link>,
       );
-    }
+    });
 
     const applicationsItems = [];
-    for (const x of applications.filter(
-      y => y.get('decision') === null
-    ).toJS()) {
+    applications.filter(y => y.get('decision') === null).toJS().forEach((x) => {
       const team = teams.get(x.teamId);
       applicationsItems.push(
         <Link
@@ -77,9 +75,9 @@ export default class SeasonParticipants extends Component {
               {team.get('name')}
             </div>
           </div>}
-        </Link>
+        </Link>,
       );
-    }
+    });
 
     // `https://unsplash.it/48/48/?image=${x.teamId}`
 

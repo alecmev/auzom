@@ -51,7 +51,8 @@ export default class MatchReportNew extends Component {
       rounds: [],
     };
     const roundsPerMap = (bracket.get('type') === 'ace-pre-swiss') ? 1 : 2;
-    for (const map of matchMaps.filter(x => !x.get('isBan')).toJS()) {
+    let scoresMissing;
+    matchMaps.filter(x => !x.get('isBan')).toJS().forEach((map) => {
       for (
         let i = 0, swap = false;
         i < roundsPerMap;
@@ -78,6 +79,7 @@ export default class MatchReportNew extends Component {
           (round.rawScoreX === '' || round.rawScoreY === '')
         ) {
           messagePush('some scores missing', true);
+          scoresMissing = true;
           return;
         }
 
@@ -107,7 +109,8 @@ export default class MatchReportNew extends Component {
 
         body.rounds.push(round);
       }
-    }
+    });
+    if (scoresMissing) return;
 
     if (this.state.wholeMatch) {
       body.penalties = [];
@@ -261,7 +264,8 @@ export default class MatchReportNew extends Component {
                     onClick={this.handleToggleOverride}
                   />}
                   {amAdmin && !!this.state[key] &&
-                  [...Array(this.state[key])].map((_, j) =>
+                  [...Array(this.state[key])].map((_, j) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <div key={`${key}-penalty-${j}`}>
                       <Input
                         ref={this.rcb(`${key}-penaltyReason-${j}`)}
@@ -279,7 +283,7 @@ export default class MatchReportNew extends Component {
                         label={`${swap ? sideX : sideY} penalty ${j}`}
                       />
                     </div>
-                  )}
+                  ))}
                   {amAdmin && <Button
                     block
                     className={this.cn({ d: 'button' })}
@@ -298,7 +302,7 @@ export default class MatchReportNew extends Component {
                     meta={key}
                     onClick={this.handleRemovePenalty}
                   />}
-                </div>
+                </div>,
               );
             }
 
@@ -351,7 +355,8 @@ export default class MatchReportNew extends Component {
               onClick={this.handleToggleOverride}
             />
             {!!this.state.wholeMatch &&
-            [...Array(this.state.wholeMatch)].map((_, i) =>
+            [...Array(this.state.wholeMatch)].map((_, i) => (
+              // eslint-disable-next-line react/no-array-index-key
               <div key={`wholeMatch-penalty-${i}`}>
                 <Input
                   ref={this.rcb(`wholeMatch-penaltyReason-${i}`)}
@@ -380,7 +385,7 @@ export default class MatchReportNew extends Component {
                   label={`Raw Y penalty ${i}`}
                 />
               </div>
-            )}
+            ))}
             <Button
               block
               className={this.cn({ d: 'button' })}

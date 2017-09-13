@@ -59,7 +59,6 @@ export default class New extends Component {
         `only admins can create ${resourceName || 'this resource'}`, true,
       );
       this.context.router.push('/');
-      return;
     }
   }
 
@@ -70,7 +69,7 @@ export default class New extends Component {
     } = this.props;
 
     const body = {};
-    for (const [field, { type }] of Object.entries(fields)) {
+    Object.entries(fields).forEach(([field, { type }]) => {
       if (type === 'hidden') {
         body[field] = fields[field].value;
       } else {
@@ -85,13 +84,13 @@ export default class New extends Component {
           body[field] = value;
         }
       }
-    }
+    });
 
     createResource(body, noMessage ?
       onSuccess : (...args) => {
         messagePush(`created ${an ? 'an' : 'a'} ${resourceName || 'resource'}`);
         onSuccess && onSuccess(...args);
-      }
+      },
     );
   };
 
@@ -100,18 +99,18 @@ export default class New extends Component {
 
     let lastNonBool;
     let lastBools = [];
-    for (const [field, { type }] of Object.entries(fields)) {
+    Object.entries(fields).forEach(([field, { type }]) => {
       if (type !== 'boolean') {
         lastNonBool = field;
         lastBools = [];
       } else lastBools.push(field);
-    }
+    });
 
     const form = [];
     const defaultDate = (new Date()).setMinutes(0, 0, 0);
-    for (const [
+    Object.entries(fields).forEach(([
       field, { type, name, value, options },
-    ] of Object.entries(fields)) {
+    ]) => {
       if (type === 'hidden') {
         // continue
       } else if (type === 'date') {
@@ -183,7 +182,7 @@ export default class New extends Component {
           />,
         );
       }
-    }
+    });
 
     return (
       <div className={this.cni({ m: this.props.lighter && 'lighter' })}>

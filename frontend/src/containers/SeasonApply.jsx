@@ -21,7 +21,7 @@ export default class SeasonApply extends Component {
   };
 
   handleSuccess = x => this.context.router.push(
-    `${this.props.seasonPath}/participants/${x.teamId}`
+    `${this.props.seasonPath}/participants/${x.teamId}`,
   );
 
   render() {

@@ -22,7 +22,7 @@ const newsItemsSelector = createSelector(
   (x, season) =>
     season && x.toList().filter(y =>
       y.get('target') === 'season' &&
-      y.get('targetId') === season.get('id')
+      y.get('targetId') === season.get('id'),
     ).sort((a, b) => {
       const ap = a.get('publishedAt');
       const bp = b.get('publishedAt');
@@ -172,7 +172,7 @@ export default class SeasonHome extends Component {
     const newsBlock = [];
     if (newsItems) {
       let size = 'L';
-      for (const x of newsItems.toJS()) {
+      newsItems.toJS().forEach((x) => {
         const publishedAt = x.publishedAt && new Date(x.publishedAt);
         newsBlock.push(
           <Link
@@ -203,12 +203,12 @@ export default class SeasonHome extends Component {
                 ) || 'DRAFT'
               }</div>
             </div>
-          </Link>
+          </Link>,
         );
 
         if (size === 'L') size = 'M';
         else if (size === 'M') size = 'S';
-      }
+      });
 
       if (newsBlock.length === 1) {
         newsBlock.push(
@@ -218,7 +218,7 @@ export default class SeasonHome extends Component {
               d: 'tile',
               m: ['M', 'none'],
             })}
-          />
+          />,
         );
       } else if ((newsBlock.length - 2) % 3 > 0) {
         for (let i = 0; i < (newsBlock.length - 2) % 3; i += 1) {
@@ -229,7 +229,7 @@ export default class SeasonHome extends Component {
                 d: 'tile',
                 m: ['S', 'none'],
               })}
-            />
+            />,
           );
         }
       }
@@ -299,7 +299,8 @@ export default class SeasonHome extends Component {
                 <div className={this.cn({ d: 'infoFiller' })} />
                 {canApply && <Button
                   className={this.cn({ d: 'infoButton' })}
-                  text="apply..." type="important"
+                  text="apply..."
+                  type="important"
                   href={`${seasonPath}/apply`}
                 />}
                 {!canApply && myTeam && <div
@@ -314,12 +315,14 @@ export default class SeasonHome extends Component {
                 </div>}
                 {myId && !amLeader && <Button
                   className={this.cn({ d: 'infoButton' })}
-                  text="create team to apply..." type="important"
+                  text="create team to apply..."
+                  type="important"
                   href="/teams/new"
                 />}
                 {!myId && <Button
                   className={this.cn({ d: 'infoButton' })}
-                  text="sign up to apply..." type="important"
+                  text="sign up to apply..."
+                  type="important"
                   href="/signup"
                 />}
               </div>
@@ -332,7 +335,8 @@ export default class SeasonHome extends Component {
             tournament.facebook ||
             tournament.twitch ||
             tournament.youtube
-          ) && <div className={this.cn({ d: 'extra' })}>
+          ) &&
+          <div className={this.cn({ d: 'extra' })}>
             <div className={this.cn({ u: 'sectionMargined' })}>
               <div className={this.cn({ d: 'extraInner' })}>
                 {tournament.email && <a
@@ -437,30 +441,39 @@ export default class SeasonHome extends Component {
                   ADMIN
                 </div>
                 <Button
-                  text="add news..." type="important" size="large"
+                  text="add news..."
+                  type="important"
+                  size="large"
                   href={`${this.props.seasonPath}/news/new`}
                 />
                 <Button
-                  text="tournament settings..." type="important" size="large"
+                  text="tournament settings..."
+                  type="important"
+                  size="large"
                   href={`${this.props.tournamentPath}/_/settings`}
                 />
                 <Button
-                  text="season settings..." type="important" size="large"
+                  text="season settings..."
+                  type="important"
+                  size="large"
                   href={`${this.props.seasonPath}/_/settings`}
                 />
                 {!season.endedAt &&
                 season.signupsClosedAt &&
                 season.signupsClosedAt < now &&
                 applications &&
-                applications.filter(
-                  x => x.get('decision') === null
-                ).size > 0 && <Button
-                  text="accept all" type="important" size="large"
+                applications.filter(x => x.get('decision') === null).size > 0 &&
+                <Button
+                  text="accept all"
+                  type="important"
+                  size="large"
                   meta={season.id}
                   onClick={this.handleAcceptAll}
                 />}
                 {!season.endedAt && <Button
-                  text="end season" type="important" size="large"
+                  text="end season"
+                  type="important"
+                  size="large"
                   meta={season.id}
                   onClick={this.handleEndSeason}
                 />}

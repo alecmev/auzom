@@ -49,7 +49,7 @@ export default class MatchMaps extends Component {
     this.load(this.props);
     const { bracket, match } = this.props;
     if (!bracket || !match || (
-        bracket.get('mapVetoProcedure') !== '' &&
+      bracket.get('mapVetoProcedure') !== '' &&
         !match.get('areMapsReady')
     )) {
       this.setState({ interval: setInterval(this.refresh, 10000) });
@@ -65,7 +65,7 @@ export default class MatchMaps extends Component {
     this.load(nextProps, this.props);
     const { bracket, match } = nextProps;
     if (bracket && match && (
-        bracket.get('mapVetoProcedure') === '' ||
+      bracket.get('mapVetoProcedure') === '' ||
         match.get('areMapsReady')
     )) {
       clearInterval(this.state.interval);
@@ -113,16 +113,19 @@ export default class MatchMaps extends Component {
 
     const picked = [];
     const pickedIds = [];
-    for (const mm of matchMaps.toJS()) {
+    matchMaps.toJS().forEach((mm) => {
       picked.push(
-        <div key={`p${mm.id}`} className={this.cn({
-          d: 'avail',
-          m: [
-            'picked',
-            mm.teamId && (mm.teamId === match.get('teamX') ? 'x' : 'y'),
-            mm.isBan ? 'ban' : 'pick',
-          ],
-        })}>
+        <div
+          key={`p${mm.id}`}
+          className={this.cn({
+            d: 'avail',
+            m: [
+              'picked',
+              mm.teamId && (mm.teamId === match.get('teamX') ? 'x' : 'y'),
+              mm.isBan ? 'ban' : 'pick',
+            ],
+          })}
+        >
           <div className={this.cn({ d: 'mapOuter' })}>
             <div className={this.cn({
               d: 'map',
@@ -131,10 +134,10 @@ export default class MatchMaps extends Component {
               {gameMaps.get(mm.gameMapId).get('name')}
             </div>
           </div>
-        </div>
+        </div>,
       );
       pickedIds.push(mm.gameMapId);
-    }
+    });
 
     let rawProcedure = bracket.get('mapVetoProcedure');
     if (bracketRound.get('mapVetoProcedure') !== '') {
@@ -170,37 +173,44 @@ export default class MatchMaps extends Component {
             isBan ? 'ban' : 'pick',
             isX && 'x', isY && 'y',
           ],
-        })}>{
-          bracketMaps && bracketMaps
-          .filter(x => !pickedIds.includes(x.get('gameMapId')))
-          .sortBy((x) => {
-            const gm = gameMaps.get(x.get('gameMapId'));
-            return (gm && gm.get('name')) || x.get('gameMapId');
-          })
-          .toJS().map((x) => {
-            const gm = gameMaps.get(x.gameMapId);
-            const name = (gm && gm.get('name')) || x.gameMapId;
-            const isPickable = !hasSub || x.subPool === sub;
-            return (
-              <div key={`a${x.id}`} className={this.cn({
-                d: 'mapOuter',
-                m: [isX && 'x', isY && 'y'],
-              })}>
-                <button data-id={x.gameMapId} className={this.cn({
-                  d: 'map',
-                  m: isPickable ? (canPick && 'pointer') : 'nope',
-                })} onClick={canPick && isPickable && this.pick}>
-                  {name} <span
-                    className={this.cn({ d: 'mapPool' })}
-                    title="map sub-pool"
+        })}>
+          {bracketMaps && bracketMaps
+            .filter(x => !pickedIds.includes(x.get('gameMapId')))
+            .sortBy((x) => {
+              const gm = gameMaps.get(x.get('gameMapId'));
+              return (gm && gm.get('name')) || x.get('gameMapId');
+            })
+            .toJS().map((x) => {
+              const gm = gameMaps.get(x.gameMapId);
+              const name = (gm && gm.get('name')) || x.gameMapId;
+              const isPickable = !hasSub || x.subPool === sub;
+              return (
+                <div
+                  key={`a${x.id}`}
+                  className={this.cn({
+                    d: 'mapOuter',
+                    m: [isX && 'x', isY && 'y'],
+                  })}
+                >
+                  <button
+                    data-id={x.gameMapId}
+                    className={this.cn({
+                      d: 'map',
+                      m: isPickable ? (canPick && 'pointer') : 'nope',
+                    })}
+                    onClick={canPick && isPickable && this.pick}
                   >
-                    {x.subPool}
-                  </span>
-                </button>
-              </div>
-            );
-          })
-        }</div>
+                    {name} <span
+                      className={this.cn({ d: 'mapPool' })}
+                      title="map sub-pool"
+                    >
+                      {x.subPool}
+                    </span>
+                  </button>
+                </div>
+              );
+            })}
+        </div>
       );
     }
 
@@ -216,36 +226,37 @@ export default class MatchMaps extends Component {
             <div className={this.cn({ d: 'procedureTitle' })}>
               THE PROCEDURE
             </div>
-            <div
-              className={this.cn({ d: 'procedureList' })}
-            >{procedure.map((action, i) => {
-              let letter = action[0];
-              const isBan = letter.toUpperCase() !== letter;
-              letter = letter.toUpperCase();
-              const [isX, isY, isR] = [
-                letter === 'X',
-                letter === 'Y',
-                letter === 'R',
-              ];
-              const sub = +action[1];
-              const hasSub = !isNaN(sub);
-              const isDone = areMapsReady || i < picked.length;
-              return (
-                <div key={`proc${i}`}><div className={this.cn({
-                  d: 'procedureItem',
-                  m: [isBan ? 'ban' : 'pick', isDone && 'done'],
-                })}>
-                  {isR && 'auto-'}{isBan ? 'ban' : 'pick'} {hasSub && <span
-                    className={this.cn({ d: 'mapPool' })}
-                    title="map sub-pool"
-                  >{sub}</span>}
-                  {!isR && <div className={this.cn({
-                    d: 'procedureWho',
-                    m: [isX && 'x', isY && 'y', isDone && 'done'],
-                  })} />}
-                </div></div>
-              );
-            })}</div>
+            <div className={this.cn({ d: 'procedureList' })}>
+              {procedure.map((action, i) => {
+                let letter = action[0];
+                const isBan = letter.toUpperCase() !== letter;
+                letter = letter.toUpperCase();
+                const [isX, isY, isR] = [
+                  letter === 'X',
+                  letter === 'Y',
+                  letter === 'R',
+                ];
+                const sub = +action[1];
+                const hasSub = !isNaN(sub);
+                const isDone = areMapsReady || i < picked.length;
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={`proc${i}`}><div className={this.cn({
+                    d: 'procedureItem',
+                    m: [isBan ? 'ban' : 'pick', isDone && 'done'],
+                  })}>
+                    {isR && 'auto-'}{isBan ? 'ban' : 'pick'} {hasSub && <span
+                      className={this.cn({ d: 'mapPool' })}
+                      title="map sub-pool"
+                    >{sub}</span>}
+                    {!isR && <div className={this.cn({
+                      d: 'procedureWho',
+                      m: [isX && 'x', isY && 'y', isDone && 'done'],
+                    })} />}
+                  </div></div>
+                );
+              })}
+            </div>
           </div>}
         </div>
       </div>

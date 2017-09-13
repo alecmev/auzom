@@ -11,10 +11,16 @@ globals:
 rules:
   # too many requires to bother disabling per-line
   global-require: 0
+  # see below
+  jsx-a11y/accessible-emoji: 0
   # don't mean to offend, but blind people don't play first person shooters
   jsx-a11y/anchor-has-content: 0
   # don't really care about a11y
-  jsx-a11y/img-has-alt: 0
+  jsx-a11y/alt-text: 0
+  # see above
+  jsx-a11y/iframe-has-title: 0
+  # see above
+  jsx-a11y/no-noninteractive-tabindex: 0
   # same as airbnb, just 80 chars instead of 100
   max-len: [2, 80, 2, { ignoreUrls: true, ignoreComments: false }]
   # apparently, x.y[0].z counts as a 4-level chain...
@@ -23,6 +29,8 @@ rules:
   no-alert: 0
   # yeah, no
   no-continue: 0
+  # I like me aligned comments
+  no-multi-spaces: [2, { ignoreEOLComments: true }]
   # doesn't allow mutating arguments otherwise
   no-param-reassign: [2, { props: false }]
   # just my preference
@@ -39,3 +47,5 @@ rules:
   react/prefer-stateless-function: 0
   # React is imported automatically by a plugin
   react/react-in-jsx-scope: 0
+  # good intentions, but makes code more verbose
+  react/require-default-props: 0

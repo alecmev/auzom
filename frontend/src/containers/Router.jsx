@@ -166,7 +166,7 @@ export default class Router extends Component {
       <ReactRouter
         history={browserHistory}
         render={applyRouterMiddleware(useScroll(
-          (_, { location }) => !location.hash
+          (_, { location }) => !location.hash,
         ))}
       >
         <Route path="/" component={Page}>
@@ -313,10 +313,10 @@ export default class Router extends Component {
                 <Route
                   path="new"
                   component={
-                    props => <SeasonNewsItemEditor
+                    props => (<SeasonNewsItemEditor
                       {...props}
                       isNew
-                    />
+                    />)
                   }
                   onEnter={this.redirectIfNotAdmin}
                 />

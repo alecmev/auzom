@@ -176,13 +176,13 @@ function cache(state = cacheInitial, action) {
       let payload = action.payload;
       if (!Array.isArray(payload)) payload = [payload];
       let newstate = state;
-      for (const item of payload) {
+      payload.forEach((item) => {
         const _item = fromJS(item);
         // TODO: this is VERY expensive, be 200% sure it's the only way
         if (!_item.equals(newstate.getIn([action.storage, item.id]))) {
           newstate = newstate.setIn([action.storage, item.id], _item);
         }
-      }
+      });
 
       return newstate;
     }

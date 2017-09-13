@@ -94,12 +94,12 @@ export default class CommentsItem extends Component {
     if (x.isDeleted && (!amAdmin || !this.state.peeking)) {
       body = 'DELETED ¯\\\\\\_(ツ)_/¯';
     } else {
-      for (const [emote, { image_id: id }] of Object.entries(emotes.emotes)) {
+      Object.entries(emotes.emotes).forEach(([emote, { image_id: id }]) => {
         body = body.replace(
           new RegExp(emote, 'g'),
           `![${emote}](${emotes.template.small.replace('{image_id}', id)})`,
         );
-      }
+      });
     }
 
     return (

@@ -8,9 +8,9 @@ function query(filters) {
   const res = [];
 
   if (filters) {
-    for (const [field, value] of Object.entries(filters)) {
+    Object.entries(filters).forEach(([field, value]) => {
       res.push(`filter[${snakeCase(field)}]=${value}`);
-    }
+    });
   }
 
   return res.length ? `?${res.join('&')}` : '';
@@ -70,54 +70,57 @@ export default function callAPI({
       headers,
       body: JSON.stringify(body),
     })
-    .then(checkStatusParseJSON)
-    .then((json) => {
-      dispatch({
-        type: `${type}__SUCCESS`,
-        storage,
-        meta,
-        payload: json,
-      });
-      if (Array.isArray(ids) && ids.length) {
-        const freshIds = json.reduce((r, x) => r.concat(x.id), []);
-        for (const id of ids) {
-          if (!freshIds.includes(id)) dispatch(loaders._self(id, deps));
+      .then(checkStatusParseJSON)
+      .then((json) => {
+        dispatch({
+          type: `${type}__SUCCESS`,
+          storage,
+          meta,
+          payload: json,
+        });
+        if (Array.isArray(ids) && ids.length) {
+          const freshIds = json.reduce((r, x) => r.concat(x.id), []);
+          ids.forEach((id) => {
+            if (!freshIds.includes(id)) dispatch(loaders._self(id, deps));
+          });
         }
-      }
-      (() => {
-        // TODO: accept '*' deps
-        const depLoaders = Object.entries(pick(loaders, deps));
-        // this is safe because pick always returns an object
-        if (!Object.keys(depLoaders).length) return;
-        let data = json;
-        if (!Array.isArray(data)) data = [data];
-        for (const x of data) {
-          for (const [dep, loader] of depLoaders) {
-            const id = x[dep];
-            id !== undefined && id !== null &&
+        (() => {
+          // TODO: accept '*' deps
+          const depLoaders = Object.entries(pick(loaders, deps));
+          // this is safe because pick always returns an object
+          if (!Object.keys(depLoaders).length) return;
+          let data = json;
+          if (!Array.isArray(data)) data = [data];
+          data.forEach((x) => {
+            depLoaders.forEach(([dep, loader]) => {
+              const id = x[dep];
+              if (id === undefined || id === null) return;
               dispatch(loader(id, undefined, x));
-          }
+            });
+          });
+        })();
+        typeof onSuccess === 'function' && onSuccess(json, dispatch, getState);
+        dispatch({ type: 'LOADED' });
+      }, (err) => {
+        if (!Array.isArray(err)) throw err; // some nasty logical error
+        const [message, response] = err;
+        const isUnauthorized = response.status === 401;
+        const isExpired = isUnauthorized && message === 'session expired';
+        const isBadToken = isUnauthorized && message === 'bad token';
+        if (isExpired || isBadToken) dispatch({ type: 'CLEAR_SESSION' });
+        dispatch({
+          type: `${type}__FAILURE`,
+          storage,
+          meta,
+          isNotFound: response.status === 404,
+        });
+        if (typeof onFailure === 'function') {
+          onFailure(message, dispatch, getState);
         }
-      })();
-      typeof onSuccess === 'function' && onSuccess(json, dispatch, getState);
-      dispatch({ type: 'LOADED' });
-    }, (err) => {
-      if (!Array.isArray(err)) throw err; // some nasty logical error
-      const [message, response] = err;
-      const isUnauthorized = response.status === 401;
-      const isExpired = isUnauthorized && message === 'session expired';
-      const isBadToken = isUnauthorized && message === 'bad token';
-      (isExpired || isBadToken) && dispatch({ type: 'CLEAR_SESSION' });
-      dispatch({
-        type: `${type}__FAILURE`,
-        storage,
-        meta,
-        isNotFound: response.status === 404,
+
+        dispatch(messagePush(message, true, response.status, url));
+        dispatch({ type: 'LOADED' });
       });
-      typeof onFailure === 'function' && onFailure(message, dispatch, getState);
-      dispatch(messagePush(message, true, response.status, url));
-      dispatch({ type: 'LOADED' });
-    });
 
     // LOADED action comes after everything else as to prevent some containers,
     // like Game, from flashing NotFound for a split second, before showing an

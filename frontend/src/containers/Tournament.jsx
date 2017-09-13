@@ -28,7 +28,7 @@ const tournamentSelector = createSelector(
   tournamentSlugSelector,
   (tournaments, gameId, slug) => tournaments.toList().find(x =>
     x.get('gameId') === gameId &&
-    x.get('slug') === slug
+    x.get('slug') === slug,
   ),
 );
 
@@ -56,7 +56,7 @@ const membershipsSelector = createSelector(
   (userTeams, myId) =>
     myId && userTeams.toList().filter(x =>
       x.get('userId') === myId &&
-      x.get('leftAt') === null
+      x.get('leftAt') === null,
     ),
 );
 
@@ -76,7 +76,7 @@ const participantsSelector = createSelector(
   selectors.teams,
   (teamSeasons, season, teams) =>
     season && teamSeasons.toList().filter(x =>
-      x.get('seasonId') === season.get('id')
+      x.get('seasonId') === season.get('id'),
     ).sort((a, b) => {
       const ta = teams.get(a.get('teamId'));
       if (ta) {
@@ -92,9 +92,9 @@ const myParticipationSelector = createSelector(
   participantsSelector,
   membershipTeamIdsSelector,
   (x, ids) => x && ids && x.filter(
-    y => ids.includes(y.get('teamId'))
+    y => ids.includes(y.get('teamId')),
   ).sort(
-    (a, b) => b.get('createdAt').localeCompare(a.get('createdAt'))
+    (a, b) => b.get('createdAt').localeCompare(a.get('createdAt')),
   ).first(),
 );
 
@@ -104,7 +104,7 @@ const applicationsSelector = createSelector(
   selectors.teams,
   (teamSeasonRequests, season, teams) =>
     season && teamSeasonRequests.toList().filter(x =>
-      x.get('seasonId') === season.get('id')
+      x.get('seasonId') === season.get('id'),
     ).sort((a, b) => {
       const ta = teams.get(a.get('teamId'));
       if (ta) {
@@ -120,9 +120,9 @@ const myApplicationSelector = createSelector(
   applicationsSelector,
   membershipTeamIdsSelector,
   (x, ids) => x && ids && x.filter(
-    y => ids.includes(y.get('teamId'))
+    y => ids.includes(y.get('teamId')),
   ).sort(
-    (a, b) => b.get('createdAt').localeCompare(a.get('createdAt'))
+    (a, b) => b.get('createdAt').localeCompare(a.get('createdAt')),
   ).first(),
 );
 
@@ -188,7 +188,7 @@ export default class Tournament extends Component {
 
   load({
     myId, gameSlug, game, tournamentSlug, tournamentPath, tournament,
-    tournamentSeasons, seasonSlug, season, children, location,
+    tournamentSeasons, seasonSlug, season, location,
     memberships, participants, applications,
   }, prevProps) {
     if (myId && (!prevProps || myId !== prevProps.myId)) {
@@ -233,7 +233,8 @@ export default class Tournament extends Component {
         !tournamentSeasons || !tournamentSeasons.size || (
           location.pathname !== tournamentPath &&
           !shortcuts.includes(seasonSlug)
-      )) return;
+        )
+      ) return;
 
       const now = new Date();
       let currentSeason;
@@ -288,16 +289,16 @@ export default class Tournament extends Component {
 
     const sponsors = [];
     if (season) {
-      for (const sponsor of season.get('sponsors').split('\n')) {
+      season.get('sponsors').split('\n').forEach((sponsor) => {
         const sponsorItems = sponsor.trim().split(';');
-        if (sponsorItems.length < 2) continue;
+        if (sponsorItems.length < 2) return; // continue
         sponsors.push({
           title: sponsorItems[0],
           logo: sponsorItems[1],
           scale: sponsorItems[2] || 50,
           url: sponsorItems[3] || '',
         });
-      }
+      });
     }
 
     return (
@@ -321,6 +322,7 @@ export default class Tournament extends Component {
           })}>
             {sponsors.map((x, i) => (
               <div
+                // eslint-disable-next-line react/no-array-index-key
                 key={i}
                 className={this.cn({ d: 'sponsorsItemOuter' })}
               >
