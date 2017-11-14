@@ -1,4 +1,0 @@
-FROM frolvlad/alpine-glibc
-COPY migrate /usr/local/bin/
-WORKDIR /migrations
-COPY *.sql ./

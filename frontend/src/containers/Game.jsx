@@ -198,7 +198,7 @@ export default class Game extends Component {
                     Join our
                     <a
                       className={this.cn({ d: 'link' })}
-                      href="http://battlelog.battlefield.com/bf4/servers/show/pc/80b0676e-e188-4c75-8b10-89c2ea56155e/"
+                      href="http://battlelog.battlefield.com/bf4/servers/show/pc/83f03189-90f7-4f7b-9cac-f84620d1f324/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

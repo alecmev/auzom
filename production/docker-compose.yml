@@ -1,0 +1,115 @@
+# Inspiration:
+# https://goo.gl/n1q5Gf
+# https://goo.gl/HzrrFa
+
+version: '3'
+services:
+
+  frontend:
+    image: gcr.io/auzom-legacy-jeremejevs/frontend
+    environment:
+    - VIRTUAL_HOST=legacy.auzom.gg
+    # - HTTPS_METHOD=nohttp # TODO
+    - LETSENCRYPT_HOST=legacy.auzom.gg
+    - LETSENCRYPT_EMAIL=admin@auzom.gg
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION}
+    environment:
+    - POSTGRES_PASSWORD=postgres
+    restart: unless-stopped
+
+  backend:
+    image: gcr.io/auzom-legacy-jeremejevs/backend
+    depends_on:
+    - postgres
+    environment:
+    - VIRTUAL_HOST=api.legacy.auzom.gg
+    # - HTTPS_METHOD=nohttp # TODO
+    - LETSENCRYPT_HOST=api.legacy.auzom.gg
+    - LETSENCRYPT_EMAIL=admin@auzom.gg
+    - STATIC_HOST=legacy.auzom.gg
+    - POSTGRES_URL=${POSTGRES_URL}
+    command: serve
+    restart: unless-stopped
+
+  worker:
+    image: gcr.io/auzom-legacy-jeremejevs/backend
+    depends_on:
+    - postgres
+    environment:
+    - STATIC_HOST=legacy.auzom.gg
+    - POSTGRES_URL=${POSTGRES_URL}
+    command: work
+    restart: unless-stopped
+
+  migrate:
+    image: jeremejevs/mattes-migrate:1
+    volumes:
+    - ./migrations:/migrations
+    depends_on:
+    - postgres
+    # busybox way of saying `sleep inifinity`
+    entrypoint: ash -c 'while sleep 3600; do :; done'
+
+  # TODO: external password
+  # pgweb:
+  #   image: sosedoff/pgweb
+  #   depends_on:
+  #   - postgres
+  #   environment:
+  #   - VIRTUAL_HOST=pgweb.legacy.auzom.gg
+  #   # - HTTPS_METHOD=nohttp # TODO
+  #   - LETSENCRYPT_HOST=pgweb.legacy.auzom.gg
+  #   - LETSENCRYPT_EMAIL=admin@auzom.gg
+  #   - DATABASE_URL=${POSTGRES_URL}
+  #   - AUTH_USER=foo
+  #   - AUTH_PASS=bar
+  #   restart: unless-stopped
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    # TODO: https://github.com/docker/compose/issues/5336
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: ""
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - confd:/etc/nginx/conf.d
+    - vhostd:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+    - certs:/etc/nginx/certs:ro
+    restart: unless-stopped
+
+  nginx-gen:
+    image: jwilder/docker-gen
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen: ""
+    volumes:
+    - confd:/etc/nginx/conf.d
+    - vhostd:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+    - certs:/etc/nginx/certs:ro
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+    entrypoint: []
+    command: sh -c 'wget https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl && docker-gen -notify-sighup nginx -watch -wait 5s:30s nginx.tmpl /etc/nginx/conf.d/default.conf'
+    restart: unless-stopped
+
+  nginx-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+    - confd:/etc/nginx/conf.d
+    - vhostd:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+    - certs:/etc/nginx/certs
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+
+volumes:
+  confd:
+  vhostd:
+  html:
+  certs:

@@ -1,4 +1,3 @@
-/*.sublime-workspace
-/.backup
-/.env.local
+/..sublime-*
+/.backup/
 /node_modules/

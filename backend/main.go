@@ -14,6 +14,7 @@ import (
 	"github.com/elithrar/simple-scrypt"
 	"github.com/getsentry/raven-go"
 	"github.com/jmoiron/sqlx"
+	"github.com/lib/pq"
 	"github.com/rs/cors"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/zenazn/goji"
@@ -37,17 +38,15 @@ func main() {
 		log.Fatalln("ERROR: no static host supplied, aborting")
 	}
 
+	var err error
+	dbcs, err := pq.ParseURL(os.Getenv("POSTGRES_URL"))
+	if err != nil {
+		panic(err)
+	}
+
 	// the error doesn't matter, the application shouldn't fail to launch if the
 	// database happens to be down, which is perfectly plausible
-	db, _ := sqlx.Open(
-		"postgres", `
-    sslmode=`+os.Getenv("POSTGRES_SSLMODE")+`
-    host=`+os.Getenv("POSTGRES_HOST")+`
-    port=`+os.Getenv("POSTGRES_PORT")+`
-    dbname=`+os.Getenv("POSTGRES_DBNAME")+`
-    user=`+os.Getenv("POSTGRES_USER")+`
-    password=`+os.Getenv("POSTGRES_PASSWORD"),
-	)
+	db, _ := sqlx.Open("postgres", dbcs)
 
 	var sg *sendgrid.SGClient
 	if sgKey := os.Getenv("SENDGRID"); sgKey != "" {
@@ -63,7 +62,6 @@ func main() {
 		log.Println("WARNING: no Slack hook URL found, printing to stdout")
 	}
 
-	var err error
 	var sentry *raven.Client
 	if sentryKey := os.Getenv("SENTRY"); sentryKey != "" {
 		sentry, err = raven.New(sentryKey)
@@ -92,7 +90,7 @@ func main() {
 	// without this, the "from" IP is of nginx-proxy, not the real IP
 	goji.Insert(middleware.RealIP, middleware.Logger)
 	goji.Use(cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://" + staticHost},
+		AllowedOrigins:   []string{"http://" + staticHost, "https://" + staticHost},
 		AllowedMethods:   []string{"POST", "GET", "PUT", "PATCH", "DELETE"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,

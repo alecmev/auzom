@@ -1,3 +1,13 @@
 FROM node:8
-WORKDIR /app
-CMD yarn run build 1>&2 && tar -cf - $RUN nginx.conf dist/
+
+COPY . /app
+RUN set -ex; \
+  cd /app; \
+  yarn --frozen-lockfile; \
+  yarn run build
+
+FROM nginx
+
+COPY --from=0 /app/dist/* /data/
+COPY --from=0 /app/nginx.conf /etc/nginx/
+RUN chown -R nginx:nginx /data /etc/nginx/nginx.conf

@@ -1,44 +1,6 @@
 version: '3'
 services:
 
-  nginx:
-    image: nginx
-    volumes:
-    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    - ./nginx/robots.txt:/robots.txt:ro
-    depends_on: # `links` originally
-    - backend
-    - frontend
-    ports:
-    - 0.0.0.0:3000:80
-
-  backend-common: &backend-common
-    build:
-      context: ./backend
-      dockerfile: Dockerfile-dev
-    volumes:
-    - ./backend:/go/src/app
-    - ./migrations:/migrations
-    depends_on: # `links` originally, isn't passed by `extends`, just in case
-    - postgres
-    env_file: backend/.env.local
-    environment:
-    - FORCE_COLOR=1
-    - POSTGRES_SSLMODE=disable
-    - POSTGRES_HOST=postgres
-    - POSTGRES_PORT=5432
-    - POSTGRES_DBNAME=postgres
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-
-  backend:
-    <<: *backend-common # makeshift `extends`
-    command: bash -c 'yarn --pure-lockfile && gulp; sleep infinity'
-
-  worker:
-    <<: *backend-common
-    command: bash -c 'yarn --pure-lockfile && gulp worker; sleep infinity'
-
   frontend:
     image: node:8
     working_dir: /app
@@ -48,11 +10,53 @@ services:
     - ./frontend:/app
     environment:
     - FORCE_COLOR=1
-    command: bash -c 'yarn --pure-lockfile && yarn start; sleep infinity'
+    ports: 
+    - 3000:80
+    command: bash -c 'yarn --frozen-lockfile && yarn start; sleep infinity'
 
   postgres:
     image: postgres:${POSTGRES_VERSION} # comes from .env
     environment:
     - POSTGRES_PASSWORD=postgres
     ports:
-    - 127.0.0.1:5432:5432
+    - 5432:5432
+
+  backend: &backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
+    volumes:
+    - ./backend:/go/src/app
+    depends_on: # `links` originally, isn't passed by `extends`, just in case
+    - postgres
+    environment:
+    - STATIC_HOST=localhost:3000
+    - FORCE_COLOR=1
+    - POSTGRES_URL=${POSTGRES_URL}
+    ports:
+    - 3001:80
+    command: bash -c 'yarn --frozen-lockfile && gulp; sleep infinity'
+
+  worker:
+    <<: *backend
+    ports: []
+    command: bash -c 'yarn --frozen-lockfile && gulp worker; sleep infinity'
+
+  migrate:
+    image: jeremejevs/mattes-migrate:1
+    volumes:
+    - ./migrations:/migrations
+    depends_on:
+    - postgres
+    # # busybox way of saying `sleep inifinity`
+    entrypoint: ash -c 'while sleep 3600; do :; done'
+
+  pgweb:
+    image: sosedoff/pgweb
+    depends_on:
+    - postgres
+    environment:
+    - DATABASE_URL=${POSTGRES_URL}
+    ports: 
+    - 3002:8081
+    restart: unless-stopped

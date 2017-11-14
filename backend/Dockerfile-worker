@@ -1,5 +1,0 @@
-FROM frolvlad/alpine-glibc
-RUN apk --update add ca-certificates
-COPY app /usr/local/bin/
-EXPOSE 80
-CMD ["app", "work"]

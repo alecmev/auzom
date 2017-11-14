@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+. .env
+docker-compose exec -T migrate migrate -url $POSTGRES_URL up

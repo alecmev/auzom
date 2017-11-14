@@ -36,7 +36,9 @@ function checkStatusParseJSON(response) {
 }
 /* eslint-enable */
 
-const API_PREFIX = __DEV__ ? '/api' : `https://api.${window.location.hostname}`;
+const API_PREFIX = __DEV__
+  ? 'http://localhost:3001'
+  : `https://api.${window.location.hostname}`;
 
 // TODO: generate storage from url (and rename url to resource probably, and
 // separate id into another field)

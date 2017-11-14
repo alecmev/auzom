@@ -18,7 +18,8 @@ module.exports = {
   output: {
     path: dist,
     publicPath: '/',
-    filename: '[hash].js',
+    filename: isDev ? '[hash:8].js' : '[chunkhash:8].js',
+    hashFunction: 'sha1',
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'], // https://goo.gl/cJKkwl
@@ -28,28 +29,84 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: `babel-loader${isDev ? '!eslint-loader' : ''}`,
-      }, {
+        use: [
+          'babel-loader',
+          ...(isDev ? ['eslint-loader'] : []),
+        ],
+      },
+      {
         test: /\.scss$/,
-        loaders: isDev ? [
-          'style-loader?sourceMap',
-          'css-loader?sourceMap&importLoaders=2',
-          'postcss-loader?sourceMap',
-          'sass-loader?sourceMap&sourceMapContents&outputStyle=expanded',
-        ] : undefined,
-        loader: isDev ? undefined : ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css-loader?importLoaders=1!postcss-loader!sass-loader',
+        use: isDev ? [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              sourceMapContents: true,
+              outputStyle: 'expanded',
+            },
+          },
+        ] : ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
+            },
+            'postcss-loader',
+            'sass-loader',
+          ],
         }),
-      }, {
+      },
+      {
         test: /\.css$/,
-        loader: isDev ?
-          'style-loader?sourceMap!css-loader?sourceMap' :
-          'style-loader!css-loader',
-      }, {
+        use: isDev ? [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
+        ] : [
+          'style-loader',
+          'css-loader',
+        ],
+      },
+      {
         test: /\.(png|ico|svg)$/,
         loader: 'file-loader',
-      }, { // needed for react-markdown
+        options: {
+          name: '[sha1:hash:8].[ext]',
+        },
+      },
+      { // needed for react-markdown
         test: /\.json$/,
         loader: 'json-loader',
       },
@@ -73,7 +130,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
   ] : []).concat(isDev ? [] : [
     new ExtractTextPlugin({
-      filename: '[hash].css',
+      filename: '[sha1:contenthash:8].css',
       allChunks: true,
     }),
     new webpack.LoaderOptionsPlugin({ minimize: true, debug: false }),
