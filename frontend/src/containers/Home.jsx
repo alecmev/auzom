@@ -154,12 +154,7 @@ export default class Home extends Component {
                 thinking through the rest of our journey. If you want to know
                 more about our vision, make sure to check&nbsp;
                 <a href="http://blog.auzom.gg">our blog</a>, where we&apos;ve
-                outlined our long- and short-term plans.<br /><br />
-
-                <b>Unfortunately, as of 18.10.2016, Auzom, as a startup, is
-                dead.</b> The platform will live on as an&nbsp;
-                <a href="https://github.com/auzom/auzom">open-source project</a>
-                &nbsp;until further notice. More information to come soon.
+                outlined our long- and short-term plans.
 
               </div>
             </div>
