@@ -29,4 +29,8 @@ steps:
 - waitFor: ['frontend-push', 'backend-push']
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args: ['scripts/deploy', '$COMMIT_SHA']
+  args: 
+  - -c
+  - |
+    gcloud config set compute/zone us-east1-d
+    scripts/deploy $COMMIT_SHA
