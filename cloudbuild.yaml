@@ -1,17 +1,5 @@
 steps:
 
-# BACKEND
-
-- id: 'backend-build'
-  waitFor: ['-']
-  name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend:$COMMIT_SHA', 'backend']
-
-- id: 'backend-push'
-  waitFor: ['backend-build']
-  name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/backend:$COMMIT_SHA']
-
 # FRONTEND
 
 - id: 'frontend-build'
@@ -24,12 +12,21 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/frontend:$COMMIT_SHA']
 
+# BACKEND
+
+- id: 'backend-build'
+  waitFor: ['-']
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend:$COMMIT_SHA', 'backend']
+
+- id: 'backend-push'
+  waitFor: ['backend-build']
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/backend:$COMMIT_SHA']
+
 # DEPLOYMENT
 
-- waitFor: ['backend-push', 'frontend-push']
+- waitFor: ['frontend-push', 'backend-push']
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo noice
+  args: ['scripts/deploy', '$COMMIT_SHA']

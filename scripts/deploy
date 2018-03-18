@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "" ]; then
+  echo The first argument must be a full commit hash
+  exit 1
+fi
+
+echo Getting latest secrets...
+
+scripts/secrets d
+
+echo Copying stuff...
+
+tar czf - migrations scripts .env .secrets docker-compose.prod.yml | \
+  gcloud compute ssh user@main -- -T tar xzvf -
+
+echo Running deploy-remote...
+
+gcloud compute ssh user@main -- -T bash -s -- < scripts/deploy-remote "$1"

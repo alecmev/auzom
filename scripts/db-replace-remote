@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# WARNING: Don't execute this directly
+
+# shellcheck source=docker-compose
+docker exec -i "$(. scripts/docker-compose ps -q postgres)" \
+  psql postgres postgres <<EOF
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+EOF
+
+# shellcheck source=docker-compose
+docker exec -i "$(. scripts/docker-compose ps -q postgres)" \
+  psql postgres postgres < "$1"

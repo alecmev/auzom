@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# shellcheck source=../.env
+. .env
+docker run \
+  --rm \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "$PWD:/$COMPOSE_WORKDIR" \
+  -w "/$COMPOSE_WORKDIR" \
+  docker/compose:1.19.0 "$@"

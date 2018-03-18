@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "" ]; then
+  echo The first argument must be a path to an SQL dump
+  exit 1
+fi
+
+gcloud compute scp "$1" main:
+gcloud compute ssh main -- -T bash -s -- < scripts/db-replace-remote "${1##*/}"

@@ -4,4 +4,4 @@
 EXEC=( "-c" "pkill gulp; pkill app; pkill node; pkill yarn; bash" )
 if [ "$2" = "nokill" ]; then EXEC=( ); fi
 
-docker-compose exec $1 bash "${EXEC[@]}"
+docker-compose exec "$1" bash "${EXEC[@]}"

@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# WARNING: Don't execute this directly
+
+if [ "$1" == "" ]; then
+  echo The first argument must be a full commit hash
+  exit 1
+fi
+
+echo "COMMIT_SHA=$1" >> .env
+echo "COMPOSE_WORKDIR=pwd" >> .env
+mv docker-compose.prod.yml docker-compose.yml
+
+# shellcheck source=../.env
+. .env
+
+echo Configuring Docker...
+
+docker-credential-gcr configure-docker
+
+echo Pulling images...
+
+docker pull "jeremejevs/mattes-migrate:1"
+docker pull "gcr.io/auzom-legacy-jeremejevs/frontend:$COMMIT_SHA"
+docker pull "gcr.io/auzom-legacy-jeremejevs/backend:$COMMIT_SHA"
+
+# Can't pull the above here, because Compose will fail to auth
+. scripts/docker-compose pull postgres nginx nginx-gen nginx-letsencrypt
+
+echo Migrating and launching...
+
+# Why sourcing, instead of invoking? Because this is COOS, which doesn't allow
+# to put an executable flag on anything.
+
+# shellcheck source=docker-compose
+. scripts/docker-compose pause backend worker
+# shellcheck source=db-migrate
+. scripts/db-migrate $COMPOSE_WORKDIR
+# shellcheck source=docker-compose
+. scripts/docker-compose unpause backend worker
+# shellcheck source=docker-compose
+. scripts/docker-compose up -d --remove-orphans
+# shellcheck source=db-migrate
+. scripts/db-migrate $COMPOSE_WORKDIR # For initial deployment
+
+echo Done

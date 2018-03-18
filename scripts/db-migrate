@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# shellcheck source=../.env
+. .env
+docker run \
+  --rm \
+  -v "$PWD/migrations:/migrations" \
+  --network "${1:-${PWD##*/}}_default" \
+  jeremejevs/mattes-migrate:1 -url "$POSTGRES_URL" up
+ 

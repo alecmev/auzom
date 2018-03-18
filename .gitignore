@@ -1,3 +1,6 @@
 /..sublime-*
 /.backup/
-/node_modules/
+/.secrets
+/.terraform/
+/local/
+/terraform.tfvars

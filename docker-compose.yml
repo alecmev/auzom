@@ -15,7 +15,7 @@ services:
     command: bash -c 'yarn --frozen-lockfile && yarn start; sleep infinity'
 
   postgres:
-    image: postgres:${POSTGRES_VERSION} # comes from .env
+    image: postgres:$POSTGRES_VERSION # Comes from .env
     environment:
     - POSTGRES_PASSWORD=postgres
     ports:
@@ -32,7 +32,7 @@ services:
     environment:
     - STATIC_HOST=localhost:3000
     - FORCE_COLOR=1
-    - POSTGRES_URL=${POSTGRES_URL}
+    - POSTGRES_URL=$POSTGRES_URL
     ports:
     - 3001:80
     command: bash -c 'yarn --frozen-lockfile && gulp; sleep infinity'
@@ -42,21 +42,12 @@ services:
     ports: []
     command: bash -c 'yarn --frozen-lockfile && gulp worker; sleep infinity'
 
-  migrate:
-    image: jeremejevs/mattes-migrate:1
-    volumes:
-    - ./migrations:/migrations
-    depends_on:
-    - postgres
-    # # busybox way of saying `sleep inifinity`
-    entrypoint: ash -c 'while sleep 3600; do :; done'
-
   pgweb:
     image: sosedoff/pgweb
     depends_on:
     - postgres
     environment:
-    - DATABASE_URL=${POSTGRES_URL}
+    - DATABASE_URL=$POSTGRES_URL
     ports: 
     - 3002:8081
     restart: unless-stopped
