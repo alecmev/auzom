@@ -33,4 +33,4 @@ steps:
   - -c
   - |
     gcloud config set compute/zone us-east1-d
-    scripts/deploy $COMMIT_SHA
+    CLOUDSDK_CORE_DISABLE_PROMPTS=1 scripts/deploy $COMMIT_SHA
