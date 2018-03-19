@@ -73,7 +73,11 @@ resource "google_compute_instance" "main" {
     scopes = ["storage-ro"] # For GCR
   }
 
-  metadata_startup_script = "sudo mkdir /mnt/disks/data && sudo mount /dev/disk/by-id/google-data /mnt/disks/data"
+  metadata_startup_script = <<EOF
+    mkdir -p /mnt/disks/data &&
+    mount /dev/disk/by-id/google-data /mnt/disks/data &&
+    su - user -c 'cd ~ && . scripts/docker-compose up -d'
+  EOF
 }
 
 variable "cloudflare_email" {}
