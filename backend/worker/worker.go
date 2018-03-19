@@ -18,6 +18,7 @@ import (
 
 const bl = "http://battlelog.battlefield.com/bf4"
 
+const userGameUpdateDelay = 1 * time.Minute
 const kickDelay = 10 * time.Minute
 
 // the most frequent we can poll BL is 20r per 15s, which is north of ~1r/s
@@ -61,7 +62,7 @@ type Env struct {
 
 func Run(address, password string, apiEnv *api.Env) {
 	go func() {
-		uc := time.NewTicker(5 * time.Second).C
+		uc := time.NewTicker(userGameUpdateDelay).C
 		client := http.Client{}
 		for {
 			<-uc

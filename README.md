@@ -1,4 +1,4 @@
-# [auzom](https://auzom.gg)
+# [auzom](https://legacy.auzom.gg/)
 
 Esports tournament platform by Auzom Entertainment.
 
