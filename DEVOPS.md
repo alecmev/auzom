@@ -40,7 +40,7 @@ SENDGRID=TOKEN
 SLACK=https://hooks.slack.com/services/TOKEN
 SENTRY=https://TOKEN@app.getsentry.com/TOKEN
 LOADER=loaderio-TOKEN
-BF4_ADDRESS=IP:POTY
+BF4_ADDRESS=IP:PORT
 BF4_PASSWORD=PASSWORD
 ```
 
