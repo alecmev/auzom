@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+# Does what it says: gets you a `bash` shell `in` any of the running services
+# listed in `docker-compose`.
+
+# If you run `scripts/bashin <service>`, then everything inside the `<service>`
+# container gets killed, and you get a fresh shell to do whatever. You can also
+# run `scripts/bashin <service> nokill`, to get a secondary shell inside the
+# same container, without killing anything, which can be useful for parallel
+# dependency installation.
+
+# Once you've bashed in, you might want to restart whatever you've killed, which
+# is `gulp` for `backend` and `yarn start` for `frontend`.
+
+# Haven't seen anybody else [mis]use Docker in such way, but I personally don't
+# see anything wrong with this approach (trust me, I've debated with myself
+# about this *really* hard).
+
 # https://stackoverflow.com/questions/7454526
 EXEC=( "-c" "pkill gulp; pkill app; pkill node; pkill yarn; bash" )
 if [ "$2" = "nokill" ]; then EXEC=( ); fi
