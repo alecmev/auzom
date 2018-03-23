@@ -1,20 +1,20 @@
-terraform {  
+terraform {
   backend "gcs" {
-    project = "auzom-legacy-jeremejevs"
-    bucket  = "auzom-legacy-jeremejevs"
+    project = "digital-seat-198720"
+    bucket  = "digital-seat-198720"
     path    = "terraform.tfstate"
   }
 }
 
 provider "google" {
   version = "~> 1.7"
-  project = "auzom-legacy-jeremejevs"
+  project = "digital-seat-198720"
   region  = "us-east1"
 }
 
 # Be advised, Terraform's state is stored in this bucket
-resource "google_storage_bucket" "auzom-legacy-jeremejevs" {
-  name          = "auzom-legacy-jeremejevs"
+resource "google_storage_bucket" "digital-seat-198720" {
+  name          = "digital-seat-198720"
   storage_class = "REGIONAL"
   location      = "us-east1"
 

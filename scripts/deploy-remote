@@ -21,8 +21,8 @@ docker-credential-gcr configure-docker
 echo Pulling images...
 
 docker pull "jeremejevs/mattes-migrate:1"
-docker pull "gcr.io/auzom-legacy-jeremejevs/frontend:$COMMIT_SHA"
-docker pull "gcr.io/auzom-legacy-jeremejevs/backend:$COMMIT_SHA"
+docker pull "gcr.io/digital-seat-198720/frontend:$COMMIT_SHA"
+docker pull "gcr.io/digital-seat-198720/backend:$COMMIT_SHA"
 
 # Can't pull the above here, because Compose will fail to auth
 . scripts/docker-compose pull postgres nginx nginx-gen nginx-letsencrypt

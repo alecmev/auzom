@@ -3,3 +3,4 @@
 /.secrets
 /.terraform/
 /terraform.tfvars
+/terraform.tfstate
