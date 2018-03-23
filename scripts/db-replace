@@ -5,5 +5,6 @@ if [ "$1" == "" ]; then
   exit 1
 fi
 
-gcloud compute scp "$1" main:
-gcloud compute ssh main -- -T bash -s -- < scripts/db-replace-remote "${1##*/}"
+gcloud compute scp "$1" user@main:
+gcloud compute ssh user@main -- -T bash -s -- < \
+  scripts/db-replace-remote "${1##*/}"

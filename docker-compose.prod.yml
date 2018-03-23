@@ -62,6 +62,8 @@ services:
 
   nginx-gen:
     image: jwilder/docker-gen
+    depends_on:
+    - nginx
     labels: [com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen]
     volumes:
     - confd:/etc/nginx/conf.d
@@ -84,6 +86,8 @@ services:
 
   nginx-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
+    depends_on:
+    - nginx-gen
     volumes:
     - confd:/etc/nginx/conf.d
     - vhostd:/etc/nginx/vhost.d
