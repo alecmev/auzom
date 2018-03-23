@@ -7,6 +7,8 @@ services:
 
   frontend:
     image: gcr.io/digital-seat-198720/frontend:$COMMIT_SHA
+    depends_on:
+    - nginx-letsencrypt
     environment:
     - VIRTUAL_HOST=legacy.auzom.gg
     - LETSENCRYPT_HOST=legacy.auzom.gg
@@ -24,6 +26,7 @@ services:
   backend:
     image: gcr.io/digital-seat-198720/backend:$COMMIT_SHA
     depends_on:
+    - nginx-letsencrypt
     - postgres
     environment:
     - VIRTUAL_HOST=api.legacy.auzom.gg
