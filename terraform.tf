@@ -94,7 +94,6 @@ resource "cloudflare_record" "frontend" {
   name   = "legacy"
   type   = "A"
   value  = "${google_compute_instance.main.network_interface.0.access_config.0.assigned_nat_ip}"
-  proxied = true
 }
 
 resource "cloudflare_record" "backend" {
